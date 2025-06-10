@@ -1,0 +1,64 @@
+{
+  "total_issues": 222,
+  "total_repositories": 4,
+  "issues_by_state": {
+    "closed": 173,
+    "open": 49
+  },
+  "issues_by_severity": {
+    "high": 53,
+    "low": 157,
+    "medium": 12
+  },
+  "issues_by_primary_category": {
+    "design_debt": 13,
+    "model_debt": 58,
+    "code_debt": 41,
+    "test_debt": 31,
+    "performance_debt": 30,
+    "general": 26,
+    "documentation_debt": 8,
+    "data_debt": 15
+  },
+  "ai_ml_contexts": {
+    "machine_learning": 176,
+    "deep_learning": 222,
+    "nlp": 118,
+    "reinforcement_learning": 62,
+    "computer_vision": 41,
+    "data_science": 22
+  },
+  "avg_resolution_time": 196.8612716763006,
+  "repositories_with_most_td": [
+    [
+      "huggingface/transformers",
+      102
+    ],
+    [
+      "speechbrain/speechbrain",
+      60
+    ],
+    [
+      "keras-team/keras",
+      57
+    ],
+    [
+      "labmlai/annotated_deep_learning_paper_implementations",
+      3
+    ]
+  ],
+  "temporal_trends": {
+    "2020-05": 13,
+    "2025-03": 10,
+    "2025-05": 10,
+    "2023-12": 7,
+    "2024-11": 6,
+    "2025-04": 6,
+    "2025-02": 5,
+    "2024-03": 5,
+    "2025-01": 5,
+    "2022-03": 5,
+    "2020-07": 5,
+    "2015-06": 5
+  }
+}

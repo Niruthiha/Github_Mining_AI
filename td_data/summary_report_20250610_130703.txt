@@ -1,0 +1,33 @@
+
+TECHNICAL DEBT MINING REPORT
+============================
+Generated: 2025-06-10 13:07:03
+
+REPOSITORIES ANALYZED
+--------------------
+Total repositories: 8
+Average stars: 39344.1
+Languages: Counter({'Python': 8})
+
+TECHNICAL DEBT ISSUES
+--------------------
+Total issues found: 222
+Valid TD issues: 96
+Average resolution time: 196.9 days
+
+ISSUE BREAKDOWN
+--------------
+By State: {'closed': 173, 'open': 49}
+By Severity: {'high': 53, 'low': 157, 'medium': 12}
+By Category: {'design_debt': 13, 'model_debt': 58, 'code_debt': 41, 'test_debt': 31, 'performance_debt': 30, 'general': 26, 'documentation_debt': 8, 'data_debt': 15}
+
+AI/ML CONTEXTS
+--------------
+{'machine_learning': 176, 'deep_learning': 222, 'nlp': 118, 'reinforcement_learning': 62, 'computer_vision': 41, 'data_science': 22}
+
+TOP REPOSITORIES WITH TECHNICAL DEBT
+-----------------------------------
+huggingface/transformers: 102 issues
+speechbrain/speechbrain: 60 issues
+keras-team/keras: 57 issues
+labmlai/annotated_deep_learning_paper_implementations: 3 issues
