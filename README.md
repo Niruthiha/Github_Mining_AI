@@ -112,19 +112,6 @@ The tool automatically handles GitHub API rate limits:
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## Citation
-
-If you use this tool in your research, please cite:
-
-```bibtex
-@software{github_td_miner,
-  title={GitHub Technical Debt Mining AI},
-  author={Your Name},
-  year={2025},
-  url={https://github.com/yourusername/Github_Mining_AI}
-}
-```
-
 ## Contact
 
 For questions, issues, or collaboration opportunities, please open an issue on GitHub.
