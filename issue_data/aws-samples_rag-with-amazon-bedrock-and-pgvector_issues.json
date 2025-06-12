@@ -1,0 +1,38 @@
+[
+  {
+    "issue_number": 4,
+    "title": "Typo in Create a self-signed SSL certificate section",
+    "author": "nibrahv",
+    "state": "closed",
+    "created_at": "2024-03-21T06:49:53Z",
+    "updated_at": "2024-03-21T09:57:04Z",
+    "labels": [],
+    "body": "\r\nTypo in Create a self-signed SSL certificate section:\r\n\r\nCurrently:\r\npython api-key-secret-manager-upload.py.py -s openAiApiKey\r\n\r\nShould be:\r\npython api-key-secret-manager-upload.py -s openAiApiKey",
+    "comments": [
+      {
+        "user": "tanveerg",
+        "body": "Thanks again , it is fixed - https://github.com/aws-samples/rag-with-amazon-bedrock-and-pgvector/commit/91c354c887866463293e825111aa86eb80553cd1"
+      }
+    ]
+  },
+  {
+    "issue_number": 3,
+    "title": "Missing CDK Bootstrap Guidance",
+    "author": "nibrahv",
+    "state": "closed",
+    "created_at": "2024-03-20T15:34:07Z",
+    "updated_at": "2024-03-20T16:52:47Z",
+    "labels": [],
+    "body": "Unable to run the initial \"npx cdk deploy BaseInfraStack\" step due to environment not having been bootstrapped.  \r\n\r\n![image](https://github.com/aws-samples/rag-with-amazon-bedrock-and-pgvector/assets/10162226/ee61f677-f97c-4634-9b1a-ec9fb2b31723)\r\n\r\nPerforming \"npx cdk bootstrap\" resolved the issue and allowed me to proceed.",
+    "comments": [
+      {
+        "user": "tanveerg",
+        "body": "@nibrahv thanks for letting me know. \r\n\r\nI have added it now - https://github.com/aws-samples/rag-with-amazon-bedrock-and-pgvector/commit/99e3c52dafaf81accc07de38cb992bbf09736cfd\r\n\r\nWill close the issue out."
+      },
+      {
+        "user": "nibrahv",
+        "body": "You are awesome, thank you!"
+      }
+    ]
+  }
+]

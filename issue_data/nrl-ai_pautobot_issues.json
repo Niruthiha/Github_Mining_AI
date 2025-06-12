@@ -1,0 +1,180 @@
+[
+  {
+    "issue_number": 18,
+    "title": "Request : Api Integration - Oobabooga ",
+    "author": "Curiosity007",
+    "state": "open",
+    "created_at": "2023-06-10T09:53:02Z",
+    "updated_at": "2023-07-17T21:36:51Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "As this is yet to support GPTQ models, maybe you can extend the functionality by adding api support of textgen webui? Textgen Webui can load GPTQ model and can expose API",
+    "comments": [
+      {
+        "user": "sdrakulich",
+        "body": "Infinitely seconding"
+      }
+    ]
+  },
+  {
+    "issue_number": 32,
+    "title": "Use any small models, like LaMini, Flan-T5-783M etc. ",
+    "author": "gitknu",
+    "state": "open",
+    "created_at": "2023-07-02T18:13:11Z",
+    "updated_at": "2023-07-02T18:13:11Z",
+    "labels": [],
+    "body": "Hello, sorry for the fact I couldn't find the solution in issues and if the question is dumb, but looking for the answer and trying by myself didn't give the result.\r\n\r\nDetails:\r\nThe problem is I have low-end PC which is capable of running Alpaca and Vicuna (both 7B), but quite slowly. On the other hand, trying different models I saw that models under 1B parameters run quite well. Mainly they are based on Flan-T5. They give good results as for my machine and quickly enough (about 3-5 tokens per second). Using it with text is another better point. For example, asking it \"basing on this text, answer -...\" I have almost perfect answer. But giving it text each time is bad practice as for me. I mean, time spend etc.\r\n\r\nShort question:\r\nIs there any way to use this tool with any of these models?\r\n\r\n    LaMini-Flan-T5-783M\r\n    Flan-T5-Alpaca (770M or something)\r\n    RWKV (under 1.5B)\r\n    (any other good small models, under 1B parameters)\r\n    If you give the detailed manual I will be very grateful! Solutions, other than pautobot, privateGPT etc. are also welcome!\r\n\r\nThank you for understanding, answers and sorry for any inconvenience!",
+    "comments": []
+  },
+  {
+    "issue_number": 31,
+    "title": "Ingesting all documents everytime it opens",
+    "author": "bendtb1",
+    "state": "open",
+    "created_at": "2023-06-30T19:56:00Z",
+    "updated_at": "2023-06-30T19:56:00Z",
+    "labels": [],
+    "body": "Hello,\r\n\r\nI am a bit of a computer newbie, but this project inspired me so much that I downloaded Python for the first time to try and build my own little GPT bot :-)\r\n\r\nI got it up and running on a commercial laptop (2ghz/16gb). So far so good.\r\n\r\nHowever, I trained it on 90 pdf files, which was too much for it given the spec of my PC. So I wanted to restart everything. That meant I closed down python, and restarted it. On startup, the PAutoBot starts ingesting everything allover - \"Note: The bot is currently ingesting data. Please wait until it finishes\".\r\n\r\nThis means I can even reduce the number of articles to e.g. 5 just to try it. So that means that eventhough I have it installed, I have not been able to actually run a single search yet. \r\n\r\nPlease help me, how do I reset the bot so I can try it properly? ",
+    "comments": []
+  },
+  {
+    "issue_number": 30,
+    "title": "Other languages",
+    "author": "Deefdeka",
+    "state": "open",
+    "created_at": "2023-06-30T14:19:21Z",
+    "updated_at": "2023-06-30T14:19:21Z",
+    "labels": [],
+    "body": "Does it work with other languages than English? If not, how may I adapt it?\r\n\r\nThank you!",
+    "comments": []
+  },
+  {
+    "issue_number": 26,
+    "title": "Metadata Generation Failed",
+    "author": "Refresherest",
+    "state": "open",
+    "created_at": "2023-06-13T23:16:40Z",
+    "updated_at": "2023-06-20T14:13:53Z",
+    "labels": [],
+    "body": "The following are snippets of one error: \"metadata-generation-failed\"\r\n\r\n![image](https://github.com/nrl-ai/pautobot/assets/136529422/f390f4cc-4854-446d-b08c-fd93715eb808)\r\n![image](https://github.com/nrl-ai/pautobot/assets/136529422/7994e4e4-9b91-4aae-905c-0a3ee8376eda)\r\n\r\nI'm not a coder. Please let me know if you require more info and if it can be resolved.\r\n\r\nThanks",
+    "comments": [
+      {
+        "user": "nimrod1990",
+        "body": "same situation"
+      },
+      {
+        "user": "Refresherest",
+        "body": "Been waiting for a while now for an answer and at the point where I lost interest. This is what I mean about this AI hoo-haa—all talk, no show."
+      },
+      {
+        "user": "vietanhdev",
+        "body": "Sorry for the late response. Maybe you can try Python 3.9 to see if the issue remains."
+      }
+    ]
+  },
+  {
+    "issue_number": 29,
+    "title": "Python 3.11 requires wrapt 1.14 or newer",
+    "author": "Kiskadee-dev",
+    "state": "open",
+    "created_at": "2023-06-18T12:39:51Z",
+    "updated_at": "2023-06-18T18:32:46Z",
+    "labels": [],
+    "body": "The project uses 1.13.3, so can't install with pip as it gives \r\n\r\n`ImportError: cannot import name 'formatargspec' from 'inspect'`",
+    "comments": [
+      {
+        "user": "vietanhdev",
+        "body": "Could you try Python 3.8 or 3.9?"
+      },
+      {
+        "user": "Kiskadee-dev",
+        "body": "It installs and runs fine with Python 3.9"
+      }
+    ]
+  },
+  {
+    "issue_number": 28,
+    "title": "Server Crashes on Doc Upload or Deletion",
+    "author": "PinataPost",
+    "state": "open",
+    "created_at": "2023-06-16T22:42:24Z",
+    "updated_at": "2023-06-16T22:55:01Z",
+    "labels": [],
+    "body": "After successfully ingesting or deleting a document, the web front end becomes unresponsive.\r\n\r\n```shell\r\nLoading new documents: 0it [00:00, ?it/s]\r\nINFO:     Shutting down\r\nINFO:     Waiting for application shutdown.\r\nINFO:     Application shutdown complete.\r\nINFO:     Finished server process [36056]\r\n```\r\n\r\nCtrl+C does not kill the program either.  I am accessing the front end from another computer using the -ip 0.0.0.0 option.",
+    "comments": [
+      {
+        "user": "PinataPost",
+        "body": "I attempted to run it on local host and can confirm that the server does not crash.  I tested again by opening up the -host 0.0.0.0 and when accessing from the local host it still crashes."
+      },
+      {
+        "user": "PinataPost",
+        "body": "Well...I uploaded a very large pdf and it crashed.   That is without opening up the host port and running from localhost only.\r\n\r\n```shell\r\nLoading new documents: 100%|█████████████████████| 1/1 [04:08<00:00, 248.76s/it]\r\nINFO:     Shutting down\r\nINFO:     Waiting for application shutdown.\r\nINFO:     Application shutdown complete.\r\nINFO:     Finished server process [43054]\r\nWARNING:chromadb:Using embedded DuckDB with persistence: data will be stored in: /home/pinata/pautobot-data/contexts/0/search_db\r\nWARNING:chromadb:Using embedded DuckDB with persistence: data will be stored in: /home/pinata/pautobot-data/contexts/0/search_db\r\nException ignored in: <function LLModel.__del__ at 0x7f3fd57f3b50>\r\nTraceback (most recent call last):\r\n  File \"/home/pinata/.local/lib/python3.10/site-packages/gpt4all/pyllmodel.py\", line 131, in __del__\r\nAttributeError: 'NoneType' object has no attribute 'llmodel_model_destroy'\r\n```"
+      }
+    ]
+  },
+  {
+    "issue_number": 27,
+    "title": "Request - Document Sets",
+    "author": "PinataPost",
+    "state": "open",
+    "created_at": "2023-06-16T22:20:32Z",
+    "updated_at": "2023-06-16T22:20:32Z",
+    "labels": [],
+    "body": "I'd love to be able to upload a set of documents that are persistent.  As is I need to clear the documents to ask questions about another one.  This could be solved by have sets that could be switched between.",
+    "comments": []
+  },
+  {
+    "issue_number": 25,
+    "title": "Thinking options/info",
+    "author": "alrightryanx",
+    "state": "open",
+    "created_at": "2023-06-12T17:23:03Z",
+    "updated_at": "2023-06-12T19:51:43Z",
+    "labels": [],
+    "body": "Can you provide a progress bar for thinking if possible? Can you also provide a way to stop thinking to start a new question/request?",
+    "comments": [
+      {
+        "user": "LanceLake",
+        "body": "This would be very hard to do with LLMs. \r\n\r\nhttps://www.youtube.com/watch?v=iZnLZFRylbs&ab_channel=TomScott"
+      }
+    ]
+  },
+  {
+    "issue_number": 22,
+    "title": "Allow batch uploads for files",
+    "author": "LanceLake",
+    "state": "closed",
+    "created_at": "2023-06-11T10:25:55Z",
+    "updated_at": "2023-06-11T17:09:41Z",
+    "labels": [],
+    "body": "Right now, I can only upload one file at a time.. To be more technical, I can set up a batch upload, but I have to select each file. What would be helpful is to recurse through directories and perhaps select multiple files in the upload file window. That would allow me to select a batch of files to be uploaded and leave it running overnight to digest them all.",
+    "comments": [
+      {
+        "user": "vietanhdev",
+        "body": "Working on it. :D "
+      },
+      {
+        "user": "vietanhdev",
+        "body": "@LanceLake Implemented in v0.0.27. Please check."
+      },
+      {
+        "user": "LanceLake",
+        "body": "This broke it. \r\n\r\nhttps://i.imgur.com/IMA0kjF.png"
+      },
+      {
+        "user": "LanceLake",
+        "body": "@vietanhdev just a suggestion, don't ask someone to test something, then close it before they can report back. "
+      },
+      {
+        "user": "vietanhdev",
+        "body": "@LanceLake Sorry. I just wanted to mark it done."
+      },
+      {
+        "user": "vietanhdev",
+        "body": "I think your screenshot belongs to another bug. Could you send me the files causing the issue?\r\nThank you!"
+      }
+    ]
+  }
+]
