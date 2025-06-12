@@ -1,0 +1,88 @@
+[
+  {
+    "issue_number": 6,
+    "title": "can't open/read file: check file path/integrity",
+    "author": "donutz10",
+    "state": "open",
+    "created_at": "2024-02-17T22:11:29Z",
+    "updated_at": "2025-05-30T14:38:11Z",
+    "labels": [],
+    "body": "[ WARN:0@662.307] global loadsave.cpp:248 cv::findDecoder imread_('b370fd35-f697-42e4-ba56-2b001ce90301.jpg'): can't open/read file: \r\ncheck file path/integrity\r\n[ WARN:1@685.185] global loadsave.cpp:248 cv::findDecoder imread_('IMG_6774.png'): can't open/read file: check file path/integrity\r\n[ WARN:2@714.205] global loadsave.cpp:248 cv::findDecoder imread_('IMG_1031.jpg'): can't open/read file: check file path/integrity\r\n[ WARN:3@900.807] global loadsave.cpp:248 cv::findDecoder imread_('IMG_6774.png'): can't open/read file: check file path/integrity\r\n\r\n![image](https://github.com/GONZOsint/gvision/assets/66228158/cc1ea80d-8876-4b11-9a93-58489c83de84)\r\n",
+    "comments": [
+      {
+        "user": "hitbuyi",
+        "body": "I have the same issue"
+      }
+    ]
+  },
+  {
+    "issue_number": 7,
+    "title": "Issue (episode 2)",
+    "author": "erikdemarco",
+    "state": "open",
+    "created_at": "2024-10-31T06:54:19Z",
+    "updated_at": "2024-10-31T06:54:19Z",
+    "labels": [],
+    "body": "```\r\nImportError: libGL.so.1: cannot open shared object file: No such file or directory\r\nTraceback:\r\nFile \"/usr/local/lib/python3.9/site-packages/streamlit/runtime/scriptrunner/exec_code.py\", line 88, in exec_func_with_error_handling\r\n    result = func()\r\nFile \"/usr/local/lib/python3.9/site-packages/streamlit/runtime/scriptrunner/script_runner.py\", line 579, in code_to_exec\r\n    exec(code, module.__dict__)\r\nFile \"/app/gvision-main/gvision.py\", line 2, in <module>\r\n    import cv2\r\nFile \"/usr/local/lib/python3.9/site-packages/cv2/__init__.py\", line 181, in <module>\r\n    bootstrap()\r\nFile \"/usr/local/lib/python3.9/site-packages/cv2/__init__.py\", line 153, in bootstrap\r\n    native_module = importlib.import_module(\"cv2\")\r\nFile \"/usr/local/lib/python3.9/importlib/__init__.py\", line 127, in import_module\r\n    return _bootstrap._gcd_import(name[level:], package, level)\r\n```",
+    "comments": []
+  },
+  {
+    "issue_number": 3,
+    "title": "Issue",
+    "author": "PierrunoYT",
+    "state": "open",
+    "created_at": "2023-07-21T19:44:50Z",
+    "updated_at": "2023-12-22T21:39:42Z",
+    "labels": [],
+    "body": "Saw your tool and that you mentioned me on Google.\r\n\r\nI woud like to try it out but I get an error\r\n\r\n![grafik](https://github.com/GONZOsint/gvision/assets/95778421/27080713-5dec-42d3-b5a2-a4a7d0ee3de9)\r\n",
+    "comments": [
+      {
+        "user": "GONZOsint",
+        "body": "Have you tried using it locally?\r\n\r\nI am aware of the streamlit bug and am working on fixing it"
+      },
+      {
+        "user": "PierrunoYT",
+        "body": "GitHub Copilot: The error message you provided indicates that there is an issue with the `cv2` module, which is used for computer vision tasks in Python. \r\n\r\nHere are a few things you can try to resolve the issue:\r\n\r\n1. Make sure that OpenCV is installed on your system. You can install it using pip by running the following command in your terminal or command prompt:\r\n\r\n   ```\r\n   pip install opencv-python\r\n   ```\r\n\r\n2. Make sure that you have the correct version of OpenCV installed for your system. You can check the version of OpenCV that is installed by running the following command in your Python interpreter:\r\n\r\n   ```python\r\n   import cv2\r\n   print(cv2.__version__)\r\n   ```\r\n\r\n   If the version number is not what you expect, you may need to uninstall and reinstall OpenCV using the correct version.\r\n\r\n3. Make sure that the `cv2` module is installed in the correct location. Depending on your system and Python installation, the `cv2` module may need to be installed in a specific location. You can try reinstalling OpenCV using the `--target` option to specify the installation location:\r\n\r\n   ```\r\n   pip install opencv-python --target=/path/to/installation/location\r\n   ```\r\n\r\n   Replace `/path/to/installation/location` with the path to the directory where you want to install OpenCV.\r\n\r\nIf none of these solutions work, please provide more information about the error message you are seeing, including the full traceback and any other relevant details."
+      },
+      {
+        "user": "PierrunoYT",
+        "body": "> Have you tried using it locally?\r\n> \r\n> I am aware of the streamlit bug and am working on fixing it\r\n\r\nCheck out my new Version"
+      },
+      {
+        "user": "PierrunoYT",
+        "body": "@GONZOsint Check out my new Version on Github"
+      }
+    ]
+  },
+  {
+    "issue_number": 5,
+    "title": "can't open/read file",
+    "author": "johala09",
+    "state": "closed",
+    "created_at": "2023-09-20T11:44:17Z",
+    "updated_at": "2023-10-19T13:40:41Z",
+    "labels": [],
+    "body": "Hi there,\r\n\r\nFor some time now, I have always had the same message when I want to use the app locally: global loadsave.cpp:248 findDecoder imread_('image-name.jpg'): can't open/read file: check file path /integrity\r\n\r\nI tried with several images and several formats (jpg, jpeg, png) but still the same error.\r\n\r\nAnd in the web interface, I have another error which appears: \"Error while loading config file: 'NoneType' object has no attribute 'shape' \"\r\n\r\nWhere could this problem come from ?",
+    "comments": []
+  },
+  {
+    "issue_number": 4,
+    "title": "No License?",
+    "author": "jerlendds",
+    "state": "closed",
+    "created_at": "2023-07-24T22:20:33Z",
+    "updated_at": "2023-07-29T14:18:21Z",
+    "labels": [],
+    "body": "Hi, this looks awesome, Id love to fork and turn this into a library I can use with my osintbuddy project eventually but I see there's no license so I'm not able to decide if I can use this. Would you consider adding a license? (this is a nice resource: https://choosealicense.com/)",
+    "comments": [
+      {
+        "user": "PierrunoYT",
+        "body": "you can use the original from me"
+      },
+      {
+        "user": "GONZOsint",
+        "body": "@jerlendds LICENSE added. Thanks!"
+      }
+    ]
+  }
+]

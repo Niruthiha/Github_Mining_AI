@@ -1,0 +1,22 @@
+label_name,frequency,td_score,matched_patterns,avg_repo_stars
+bug fix,1,1.0,fix,176033.0
+bug_fix,1,1.0,fix,176033.0
+enhancement,169,1.0,enhancement,2647.4437869822486
+hackathon,1,1.5,hack,176033.0
+hotfix,2,1.0,fix,89173.0
+improvement,2,1.5,improve,88036.0
+optimization/performance,1,1.0,performance,176033.0
+wontfix,168,1.0,fix,1620.702380952381
+refactoring,1,1.0,refactor,10964.0
+todo,1,1.0,todo,9601.0
+wontfix-temp,1,1.0,fix,1842.0
+performance,1,1.0,performance,23871.0
+hacktobefest-accepted,1,1.5,hack,8655.0
+hacktoberfest,1,1.0,hack,8655.0
+todo :spiral_notepad:,1,1.0,todo,8655.0
+:see_no_evil: wontfix,1,1.0,fix,1617.0
+refactor,1,1.0,refactor,535.0
+resolution: wont fix,1,1.0,fix,472.0
+type: fix,1,1.5,fix,472.0
+type: performance,1,1.5,performance,472.0
+type: refactor,1,1.5,refactor,472.0

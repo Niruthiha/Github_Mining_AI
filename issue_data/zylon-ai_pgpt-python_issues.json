@@ -1,0 +1,211 @@
+[
+  {
+    "issue_number": 17,
+    "title": "How to adjust timeout for contextual completions?",
+    "author": "Just-enki",
+    "state": "open",
+    "created_at": "2025-03-20T15:53:39Z",
+    "updated_at": "2025-05-19T12:47:05Z",
+    "labels": [],
+    "body": "Im moving my pgpt requests to a python api but unlike typescript I cannot change the default timeout setting, whereas in Typescript I could simply pass `const requestOptions = { timeoutInSeconds: 600, maxRetries: 1 };` with my request. This doesn't seem to be an option here. \n\nThis has worked for me when working in typescript\n```typescript\nasync function getChatResult(chatMessages: ChatMessage[], requestOptions?: ContextualCompletions.RequestOptions): Promise<ChatResult> {\n  const pgptResponse = await pgptApiClient.contextualCompletions.chatCompletion(\n    {\n      messages: chatMessages,\n      includeSources: true,\n      useContext: true,\n    },\n    requestOptions\n  );\n  return pgptResponse;\n}\n``` \n\nNow ive switched over to Python and seemingly the only way to change the values is to enter the docker container and edit `resources/contextual_completions/client.py` manually. \n\nSo far ive tried:\n1.\n```python\nclient = PrivateGPTApi(base_url=\"http://private-gpt:8001/\", timeout=600)\n```\n2.\n```python \nhttpx_client = httpx.Client(timeout=httpx.Timeout(600.0, connect=600.0, read=600.0, write=600.0))\n\nclient = PrivateGPTApi(\n    base_url=\"http://private-gpt:8001/\",\n    httpx_client=httpx_client \n``` \n3.\n```python\nclient = PrivateGPTApi(\n    base_url=\"http://private-gpt:8001/\",\n    timeout=httpx.Timeout(600.0, connect=600.0, read=600.0, write=600.0)\n```\n4.\n```python\n@app.post(\"/gpt/chat\")\nasync def gptChat(chat_request: ChatRequest):\n    try: \n        chat_result = client.contextual_completions.chat_completion(\n            messages=chat_request.messages, \n            use_context=True,\n            include_sources=True,\n            timeout=600,\n        )\n        return chat_result.choices[0].message.content\n````\nall with no success. Is there something im missing?",
+    "comments": [
+      {
+        "user": "kparnis3",
+        "body": "Any updates on this?, running into this issue too."
+      },
+      {
+        "user": "Just-enki",
+        "body": "@kparnis3 \nsorry for late reply, im running my api in docker so the workaround that has worked for me was to copy the original client.py, edit it and mount it as a volume in docker-compose.yaml to override the default settings. Unfortunately i couldn't get anything else to work. \n\nit looks like this inside my docker-compose\n    `  - ./client.py:/usr/local/lib/python3.12/site-packages/pgpt_python/resources/contextual_completions/client.py`"
+      }
+    ]
+  },
+  {
+    "issue_number": 16,
+    "title": "Alter the System Prompts dynamically",
+    "author": "Likhitha075",
+    "state": "open",
+    "created_at": "2024-11-22T08:45:01Z",
+    "updated_at": "2024-11-22T08:45:01Z",
+    "labels": [],
+    "body": "Is there an approach to dynamically set the system prompt using API calls? I'm looking for a way to alter the default system prompt through API interactions.\r\n\r\n",
+    "comments": []
+  },
+  {
+    "issue_number": 15,
+    "title": " Enquiry About Storage of Ingested Documents via API",
+    "author": "Likhitha075",
+    "state": "open",
+    "created_at": "2024-11-11T06:35:13Z",
+    "updated_at": "2024-11-11T06:36:30Z",
+    "labels": [],
+    "body": "I’m using API calls in one of my applications and have a question regarding the storage and sharing of ingested documents. \r\nSpecifically, I would like to understand where the ingested documents are stored. Any insights or guidance on this would be highly appreciated.",
+    "comments": []
+  },
+  {
+    "issue_number": 14,
+    "title": "SSL: CERTIFICATE_VERIFY_FAILED",
+    "author": "antonionardella",
+    "state": "open",
+    "created_at": "2024-11-06T10:21:59Z",
+    "updated_at": "2024-11-06T10:23:06Z",
+    "labels": [],
+    "body": "Hello,\r\n\r\nwould it be possible to add an argument to skip SSL verification for self signed certificates?\r\n\r\nThis is how `gradio_client` does it\r\n\r\n```\r\nfrom gradio_client import Client, handle_file\r\n\r\nclient = Client(\"https://pgpt.example.com/\", ssl_verify=False)\r\n```\r\n\r\nhttps://github.com/search?q=repo%3Agradio-app%2Fgradio+path%3A%2F%5Eclient%5C%2Fpython%5C%2Fgradio_client%5C%2F%2F+ssl&type=code\r\n\r\nThank you",
+    "comments": []
+  },
+  {
+    "issue_number": 13,
+    "title": "Unable to invoke summarize()",
+    "author": "Likhitha075",
+    "state": "open",
+    "created_at": "2024-10-29T12:40:39Z",
+    "updated_at": "2024-10-29T12:40:39Z",
+    "labels": [],
+    "body": "I encountered an AttributeError stating that there is no attribute called recipes. Upon investigation, I realized that I couldn't find any initialization for recipes in the PrivateGPTApi class.\r\n![image](https://github.com/user-attachments/assets/a0977d8f-a044-463f-9591-9e5bb5511db7)\r\n",
+    "comments": []
+  },
+  {
+    "issue_number": 12,
+    "title": "Sampling Params",
+    "author": "dungdt-technica",
+    "state": "open",
+    "created_at": "2024-10-02T04:05:37Z",
+    "updated_at": "2024-10-02T04:06:03Z",
+    "labels": [],
+    "body": "I would like to request the ability to specify sampling parameters when calling the chat completion function using the client. Currently, it would be beneficial to have an option to pass sampling parameters directly in the API call, similar to the following example:\r\n\r\n```python\r\nclient.contextual_completions.chat_completion(messages=messages, sampling_params=sampling_params)\r\n```",
+    "comments": []
+  },
+  {
+    "issue_number": 8,
+    "title": "Timeout is enforced in completion",
+    "author": "mrepetto94",
+    "state": "open",
+    "created_at": "2024-07-02T09:09:25Z",
+    "updated_at": "2024-09-09T10:18:53Z",
+    "labels": [],
+    "body": "Client timeout is not passed in `prompt_completion`\r\n\r\nFrom `client.py`\r\n\r\n```\r\nif include_sources is not OMIT:\r\n            _request[\"include_sources\"] = include_sources\r\n        _response = self._client_wrapper.httpx_client.request(\r\n            \"POST\",\r\n            urllib.parse.urljoin(f\"{self._client_wrapper.get_base_url()}/\", \"v1/completions\"),\r\n            json=jsonable_encoder(_request),\r\n            headers=self._client_wrapper.get_headers(),\r\n            timeout=60,\r\n        )\r\n```",
+    "comments": [
+      {
+        "user": "lrapp-adan",
+        "body": "A fixed timeout of 60s is not only set for `prompt_completion`, but unfortunately also for multiple other functions."
+      }
+    ]
+  },
+  {
+    "issue_number": 11,
+    "title": "RAG",
+    "author": "furianin",
+    "state": "open",
+    "created_at": "2024-08-16T12:37:57Z",
+    "updated_at": "2024-08-16T12:37:57Z",
+    "labels": [],
+    "body": "Is there a function that returns RAG ?\r\nlike in the GUI where there is mode RAG",
+    "comments": []
+  },
+  {
+    "issue_number": 7,
+    "title": "PGPT doesn't see Torch, TensorFlow, or Flax on startup, will not ingest files correctly",
+    "author": "maximumquacks",
+    "state": "closed",
+    "created_at": "2024-06-03T19:32:55Z",
+    "updated_at": "2024-06-04T13:32:47Z",
+    "labels": [],
+    "body": "- using WSL\r\n- running vanilla ollama with default config, no issues with ollama\r\n- pyenv python 3.11.9 installed and running with Torch, TensorFlow, Flax, and PyTorch added\r\n- all install steps followed without error.\r\n\r\nhere is what results:\r\n\r\n~/private-gpt$ PGPT_PROFILES=ollama make run\r\npoetry run python -m private_gpt\r\n15:23:33.547 [INFO    ] private_gpt.settings.settings_loader - Starting application with profiles=['default', 'ollama']\r\nNone of PyTorch, TensorFlow >= 2.0, or Flax have been found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.\r\n--- Logging error ---\r\nTraceback (most recent call last):\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 798, in get\r\n    return self._context[key]\r\n           ~~~~~~~~~~~~~^^^^^\r\nKeyError: <class 'private_gpt.ui.ui.PrivateGptUi'>\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 798, in get\r\n    return self._context[key]\r\n           ~~~~~~~~~~~~~^^^^^\r\nKeyError: <class 'private_gpt.server.ingest.ingest_service.IngestService'>\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 798, in get\r\n    return self._context[key]\r\n           ~~~~~~~~~~~~~^^^^^\r\nKeyError: <class 'private_gpt.components.llm.llm_component.LLMComponent'>\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/utils/_errors.py\", line 270, in hf_raise_for_status\r\n    response.raise_for_status()\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/requests/models.py\", line 1021, in raise_for_status\r\n    raise HTTPError(http_error_msg, response=self)\r\nrequests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2/resolve/main/config.json\r\n\r\nThe above exception was the direct cause of the following exception:\r\n\r\nTraceback (most recent call last):\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/utils/hub.py\", line 398, in cached_file\r\n    resolved_file = hf_hub_download(\r\n                    ^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py\", line 118, in _inner_fn\r\n    return fn(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/file_download.py\", line 1374, in hf_hub_download\r\n    raise head_call_error\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/file_download.py\", line 1247, in hf_hub_download\r\n    metadata = get_hf_file_metadata(\r\n               ^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/utils/_validators.py\", line 118, in _inner_fn\r\n    return fn(*args, **kwargs)\r\n           ^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/file_download.py\", line 1624, in get_hf_file_metadata\r\n    r = _request_wrapper(\r\n        ^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/file_download.py\", line 402, in _request_wrapper\r\n    response = _request_wrapper(\r\n               ^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/file_download.py\", line 426, in _request_wrapper\r\n    hf_raise_for_status(response)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/huggingface_hub/utils/_errors.py\", line 286, in hf_raise_for_status\r\n    raise GatedRepoError(message, response) from e\r\nhuggingface_hub.utils._errors.GatedRepoError: 401 Client Error. (Request ID: Root=1-665e1838-1fd0ea9e164d5e2406f3086b;e0342b1a-f0b1-482f-a2ab-c1336bdbdf04)\r\n\r\nCannot access gated repo for url https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2/resolve/main/config.json.\r\nAccess to model mistralai/Mistral-7B-Instruct-v0.2 is restricted. You must be authenticated to access it.\r\n\r\nThe above exception was the direct cause of the following exception:\r\n\r\nTraceback (most recent call last):\r\n  File \"/home/me/private-gpt/private_gpt/components/llm/llm_component.py\", line 30, in __init__\r\n    AutoTokenizer.from_pretrained(\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/models/auto/tokenization_auto.py\", line 782, in from_pretrained\r\n    config = AutoConfig.from_pretrained(\r\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/models/auto/configuration_auto.py\", line 1111, in from_pretrained\r\n    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)\r\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/configuration_utils.py\", line 633, in get_config_dict\r\n    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)\r\n                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/configuration_utils.py\", line 688, in _get_config_dict\r\n    resolved_config_file = cached_file(\r\n                           ^^^^^^^^^^^^\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/transformers/utils/hub.py\", line 416, in cached_file\r\n    raise EnvironmentError(\r\nOSError: You are trying to access a gated repo.\r\nMake sure to have access to it at https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2.\r\n401 Client Error. (Request ID: Root=1-665e1838-1fd0ea9e164d5e2406f3086b;e0342b1a-f0b1-482f-a2ab-c1336bdbdf04)\r\n\r\nCannot access gated repo for url https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2/resolve/main/config.json.\r\nAccess to model mistralai/Mistral-7B-Instruct-v0.2 is restricted. You must be authenticated to access it.\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/usr/lib/python3.11/logging/__init__.py\", line 1110, in emit\r\n    msg = self.format(record)\r\n          ^^^^^^^^^^^^^^^^^^^\r\n  File \"/usr/lib/python3.11/logging/__init__.py\", line 953, in format\r\n    return fmt.format(record)\r\n           ^^^^^^^^^^^^^^^^^^\r\n  File \"/usr/lib/python3.11/logging/__init__.py\", line 687, in format\r\n    record.message = record.getMessage()\r\n                     ^^^^^^^^^^^^^^^^^^^\r\n  File \"/usr/lib/python3.11/logging/__init__.py\", line 377, in getMessage\r\n    msg = msg % self.args\r\n          ~~~~^~~~~~~~~~~\r\nTypeError: not all arguments converted during string formatting\r\nCall stack:\r\n  File \"<frozen runpy>\", line 198, in _run_module_as_main\r\n  File \"<frozen runpy>\", line 88, in _run_code\r\n  File \"/home/me/private-gpt/private_gpt/__main__.py\", line 5, in <module>\r\n    from private_gpt.main import app\r\n  File \"<frozen importlib._bootstrap>\", line 1178, in _find_and_load\r\n  File \"<frozen importlib._bootstrap>\", line 1149, in _find_and_load_unlocked\r\n  File \"<frozen importlib._bootstrap>\", line 690, in _load_unlocked\r\n  File \"<frozen importlib._bootstrap_external>\", line 940, in exec_module\r\n  File \"<frozen importlib._bootstrap>\", line 241, in _call_with_frames_removed\r\n  File \"/home/me/private-gpt/private_gpt/main.py\", line 6, in <module>\r\n    app = create_app(global_injector)\r\n  File \"/home/me/private-gpt/private_gpt/launcher.py\", line 63, in create_app\r\n    ui = root_injector.get(PrivateGptUi)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 974, in get\r\n    provider_instance = scope_instance.get(interface, binding.provider)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 800, in get\r\n    instance = self._get_instance(key, provider, self.injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 811, in _get_instance\r\n    return provider.get(injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 264, in get\r\n    return injector.create_object(self._cls)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 998, in create_object\r\n    self.call_with_injection(init, self_=instance, kwargs=additional_kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 1031, in call_with_injection\r\n    dependencies = self.args_to_inject(\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 1079, in args_to_inject\r\n    instance: Any = self.get(interface)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 974, in get\r\n    provider_instance = scope_instance.get(interface, binding.provider)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 800, in get\r\n    instance = self._get_instance(key, provider, self.injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 811, in _get_instance\r\n    return provider.get(injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 264, in get\r\n    return injector.create_object(self._cls)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 998, in create_object\r\n    self.call_with_injection(init, self_=instance, kwargs=additional_kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 1031, in call_with_injection\r\n    dependencies = self.args_to_inject(\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 1079, in args_to_inject\r\n    instance: Any = self.get(interface)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 974, in get\r\n    provider_instance = scope_instance.get(interface, binding.provider)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 91, in wrapper\r\n    return function(*args, **kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 800, in get\r\n    instance = self._get_instance(key, provider, self.injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 811, in _get_instance\r\n    return provider.get(injector)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 264, in get\r\n    return injector.create_object(self._cls)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 998, in create_object\r\n    self.call_with_injection(init, self_=instance, kwargs=additional_kwargs)\r\n  File \"/home/me/.cache/pypoetry/virtualenvs/private-gpt-RKtlENRP-py3.11/lib/python3.11/site-packages/injector/__init__.py\", line 1040, in call_with_injection\r\n    return callable(*full_args, **dependencies)\r\n  File \"/home/me/private-gpt/private_gpt/components/llm/llm_component.py\", line 37, in __init__\r\n    logger.warning(\r\nMessage: 'Failed to download tokenizer %s. Falling back to default tokenizer.'\r\nArguments: ('mistralai/Mistral-7B-Instruct-v0.2', OSError('You are trying to access a gated repo.\\nMake sure to have access to it at https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2.\\n401 Client Error. (Request ID: Root=1-665e1838-1fd0ea9e164d5e2406f3086b;e0342b1a-f0b1-482f-a2ab-c1336bdbdf04)\\n\\nCannot access gated repo for url https://huggingface.co/mistralai/Mistral-7B-Instruct-v0.2/resolve/main/config.json.\\nAccess to model mistralai/Mistral-7B-Instruct-v0.2 is restricted. You must be authenticated to access it.'))\r\n15:23:35.428 [INFO    ] private_gpt.components.llm.llm_component - Initializing the LLM in mode=ollama\r\n15:23:35.860 [INFO    ] private_gpt.components.embedding.embedding_component - Initializing the embedding model in mode=ollama\r\n15:23:35.861 [INFO    ] llama_index.core.indices.loading - Loading all indices.\r\n15:23:36.101 [INFO    ]         private_gpt.ui.ui - Mounting the gradio UI, at path=/\r\n15:23:36.125 [INFO    ]             uvicorn.error - Started server process [19799]\r\n15:23:36.125 [INFO    ]             uvicorn.error - Waiting for application startup.\r\n15:23:36.126 [INFO    ]             uvicorn.error - Application startup complete.\r\n15:23:36.126 [INFO    ]             uvicorn.error - Uvicorn running on http://0.0.0.0:8001 (Press CTRL+C to quit)",
+    "comments": [
+      {
+        "user": "maximumquacks",
+        "body": "moved to pgpt main issues page for greater visibility"
+      }
+    ]
+  },
+  {
+    "issue_number": 6,
+    "title": "upgrade requirements - httpx lib",
+    "author": "polka1",
+    "state": "open",
+    "created_at": "2024-05-23T09:10:57Z",
+    "updated_at": "2024-05-23T09:10:57Z",
+    "labels": [],
+    "body": "what is the reason for using `httpx = \"^0.26.0\"`? Is it possible to upgrade to `0.27.0`?",
+    "comments": []
+  },
+  {
+    "issue_number": 4,
+    "title": "How to control timeout?",
+    "author": "mrepetto94",
+    "state": "closed",
+    "created_at": "2024-04-02T12:14:21Z",
+    "updated_at": "2024-05-22T19:39:01Z",
+    "labels": [],
+    "body": "Is there a way to control the timeout response from PrivateGPT? 60 sec is too little for me.",
+    "comments": [
+      {
+        "user": "imartinez",
+        "body": "you can pass a \"timeout\" parameter to the client constructor. Default is 60. Try:\r\n\r\n```\r\nclient = PrivateGPTApi(base_url=\"http://localhost:8001\", timeout=240)\r\n```"
+      },
+      {
+        "user": "mrepetto94",
+        "body": "It seems like even after setting the `timeout` when using `ingest_file`, I get a 60-second timeout anyway. After looking at the client.py file at line 80, I see it hard set at 60. The error I get is `httpx.ReadTimeout: timed out`."
+      },
+      {
+        "user": "mrepetto94",
+        "body": "I saw that the last merge introduces a timeout at the ingest file level. @imartinez let me know when you plan to release version 0.2.0 "
+      },
+      {
+        "user": "polka1",
+        "body": "for `AsyncContextualCompletionsClient` need add `timeout` parameter too. "
+      }
+    ]
+  },
+  {
+    "issue_number": 5,
+    "title": "Running two python versions concurrently",
+    "author": "SeifBach",
+    "state": "closed",
+    "created_at": "2024-04-10T08:03:14Z",
+    "updated_at": "2024-04-23T08:25:17Z",
+    "labels": [],
+    "body": "since creating the privateGPT instance in the localhost 8001requires python 3.11 (and not 3.12)\r\nand importing PrivateGPTApi in the python code requires python 3.12\r\nthe way im running it in WSL2 is opening 2 ubuntu command lines interfaces each with a corresponding conda enviorment one to run the instance and one to run the code.\r\nis this the intended way? or did i miss something obvious.\r\n\r\n(side note) how do i change the system prompt from my code \r\nand if i change it from the GUI through additional inputs. does that change apply to the code?",
+    "comments": [
+      {
+        "user": "imartinez",
+        "body": "We just released v0.1.2 which lowers the python required version to 3.11 to align it with PrivateGPT"
+      }
+    ]
+  },
+  {
+    "issue_number": 2,
+    "title": "doc request: setting use_context and include_sources from pyhon code.",
+    "author": "quincy451",
+    "state": "closed",
+    "created_at": "2024-01-26T16:52:34Z",
+    "updated_at": "2024-04-02T13:19:17Z",
+    "labels": [],
+    "body": "this code from the sample works, but don't know how to include the additional functionality of using ingested documents and including sources in the response:\r\n# Sync completion\r\nprint(\"Sync completion\")\r\nprint(\r\n    client.contextual_completions.prompt_completion(\r\n        prompt=\"Answer with just the result: 2+2\"\r\n    )\r\n    .choices[0]\r\n    .message.content\r\n)\r\n",
+    "comments": [
+      {
+        "user": "quincy451",
+        "body": "this works here:\r\nresult = client.contextual_completions.prompt_completion(\r\n    prompt=\"What did Montage do?\",\r\n    use_context=True,\r\n    context_filter={\"docs_ids\": [\"8cfc93fa-01dd-4644-82d4-e12dfff54dcf\"]},\r\n    include_sources=True,\r\n).choices[0]"
+      },
+      {
+        "user": "imartinez",
+        "body": "it is documented here \r\n\r\nhttps://github.com/zylon-ai/pgpt-python?tab=readme-ov-file#11-contextual-completion"
+      }
+    ]
+  },
+  {
+    "issue_number": 3,
+    "title": "which model is used here?",
+    "author": "Aravindiaars",
+    "state": "closed",
+    "created_at": "2024-02-22T11:09:32Z",
+    "updated_at": "2024-04-02T13:18:11Z",
+    "labels": [],
+    "body": "which model is used here?",
+    "comments": [
+      {
+        "user": "imartinez",
+        "body": "Whatever model you choose to use in the PrivateGPT server. This is just a client SDK to interact with PrivateGPT"
+      }
+    ]
+  }
+]

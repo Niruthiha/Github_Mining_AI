@@ -1,0 +1,382 @@
+[
+  {
+    "issue_number": 15,
+    "title": "book2text KeyError: 'Title'",
+    "author": "WarmCatUK",
+    "state": "open",
+    "created_at": "2025-04-02T09:28:00Z",
+    "updated_at": "2025-04-26T19:04:25Z",
+    "labels": [],
+    "body": "Came across your project when attempting to create a similar tool for summarising novels I have read but forgotten the story. Personally I found that models I tried with would sometimes ignore my specific formatting requests and do their own thing. \nMy method simply chunked the book after it had been converted to text, but I liked your method of converting an ePub.\n\nAnyway, stuck at the first hurdle.\nI've tried with a few books, converted to epub via calibre.\n\n`CSV file created: /Users/wayne/Documents/Development/ollama-ebook-summary/out/Book-1---Pawn-of-Prophecy---David-Eddings.csv\nTraceback (most recent call last):\n  File \"/Users/wayne/Documents/Development/ollama-ebook-summary/book2text.py\", line 209, in <module>\n    main(input_file, output_dir, output_csv)\n  File \"/Users/wayne/Documents/Development/ollama-ebook-summary/book2text.py\", line 193, in main\n    process_csv(output_csv)\n  File \"/Users/wayne/Documents/Development/ollama-ebook-summary/lib/chunking.py\", line 101, in process_csv\n    title = re.sub(r'^[0-9]+-', '', row['Title'])\n                                    ~~~^^^^^^^^^\nKeyError: 'Title'`",
+    "comments": [
+      {
+        "user": "uvwxy",
+        "body": "Stumbled across the same, changed the capital `Title` and `Text` to `title` and `text` respectively: \n\n```diff\nindex 4c5ee7e..7ed3ed6 100644\n--- a/lib/chunking.py\n+++ b/lib/chunking.py\n@@ -98,8 +98,8 @@ def process_csv(input_file):\n             previous_chunk = None\n             \n             for row in reader:\n-                title = re.sub(r'^[0-9]+-', '', row['Title'])\n-                text = row['Text']\n+                title = re.sub(r'^[0-9]+-', '', row['title'])\n+                text = row['text']\n                 char_count = len(text)\n \n                 # If text is empty, store title and continue\n```"
+      }
+    ]
+  },
+  {
+    "issue_number": 13,
+    "title": "Is it possible to control the output?",
+    "author": "SolanaFox2",
+    "state": "open",
+    "created_at": "2025-01-13T15:29:27Z",
+    "updated_at": "2025-01-13T18:37:27Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Love this tool/ your work. I was curious if there was a way to control the output summaries? For example, each chapter broken down summarized in 5 sentences or less? Or does this require fine tuning the model?",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "hey thanks, Fox!\r\n\r\nThis is among my \"near term\" goals.\r\n\r\nI intend to make an option to collect the summaries from each chapter and make a summary for those.. Like a recursive summary.\r\n\r\nanother option that I haven't played with is to simply feed the entire chapter (context allowing) into a model directly, but I think intermediate summaries would be more effective.\r\n\r\nsince you've made interest known, I will see about doing that sooner than later.. you'll notice the output already has a chapter column.. \r\n\r\nYou could put `True` at the beginning of each row which starts a chapter, and false until the next, then have some code collect the summaries... depending on their size it may need several intermediate summaries until context allows.\r\n\r\nAs I recall anywhere around 2500tokens and higher leads to unexpected outputs...\r\n"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "I appreciate you. I will play around and report back if I come-up with any useful ideas!"
+      }
+    ]
+  },
+  {
+    "issue_number": 10,
+    "title": "API request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate [powershell]",
+    "author": "datapta",
+    "state": "closed",
+    "created_at": "2024-12-15T09:27:17Z",
+    "updated_at": "2025-01-12T21:38:23Z",
+    "labels": [],
+    "body": "I get this error at the moment of doing the summarisation. Though there's some output for the final section of the book...\r\n\r\npython3 sum.py -c /Users/David/Documents/projects-tests/ollama-ebook-summary/out/epicshit.csv\r\n/Users/David/Documents/projects-tests/ollama-ebook-summary/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\r\n  warnings.warn(\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nProcessing completed. Output saved to epicshit_obook_summaryq5_k_m.md and epicshit_obook_summaryq5_k_m.csv.\r\n\r\nI have the models installed:\r\nollama list\r\nNAME                                  ID              SIZE      MODIFIED\r\ncognitivetech/obook_title:q3_k_m      225e33869593    3.5 GB    12 minutes ago\r\ncognitivetech/obook_summary:q5_k_m    19cc9e3d018e    5.1 GB    21 minutes ago",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "try `$` `systemctl status ollama`\r\n```bash\r\n● ollama.service - Ollama Service\r\n     Loaded: loaded (/etc/systemd/system/ollama.service; enabled; vendor preset: enabled)\r\n     Active: active (running) since Fri 2024-11-08 13:51:01 EST; 1 months 7 days ago\r\n   Main PID: 1270830 (ollama)\r\n      Tasks: 23 (limit: 38286)\r\n     Memory: 3.2G\r\n     CGroup: /system.slice/ollama.service\r\n             └─1270830 /usr/local/bin/ollama serve\r\n\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_kv_cache_init:      CUDA0 KV buffer size =  4000.00 MiB\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model: KV self size  = 4000.00 MiB, K (f16): 2000.00 MiB, V (f16): 2000.00 MiB\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model:  CUDA_Host  output buffer size =     0.55 MiB\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model:      CUDA0 compute buffer size =  2094.50 MiB\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model:  CUDA_Host compute buffer size =    70.51 MiB\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model: graph nodes  = 1030\r\nDec 14 17:02:32 scrappy ollama[1270830]: llama_new_context_with_model: graph splits = 2\r\nDec 14 17:02:32 scrappy ollama[3715521]: INFO [main] model loaded | tid=\"139971180806144\" timestamp=1734213752\r\nDec 14 17:02:32 scrappy ollama[1270830]: time=2024-12-14T17:02:32.417-05:00 level=INFO source=server.go:626 msg=\"llama runner started in 1.27 sec>\r\nDec 14 17:02:37 scrappy ollama[1270830]: [GIN] 2024/12/14 - 17:02:37 | 200 |  7.701968931s |       127.0.0.1 | POST     \"/api/generate\"\r\n```\r\n\r\nat the very top is this line\r\n`     Loaded: loaded (/etc/systemd/system/ollama.service; enabled; vendor preset: enabled)`\r\n\r\nfrom there we get the location of the ollama service file \r\n\r\n`$ cat /etc/systemd/system/ollama.service`\r\n\r\nlook in there for this line\r\n\r\n`Environment=\"OLLAMA_HOST=localhost:11434\"`\r\n\r\nif its not there, then add it.. and reload the service .. otherwise share its contents with me\r\n\r\n\r\n"
+      },
+      {
+        "user": "datapta",
+        "body": "I'm on Mac, I've tried these commands without success:\r\n(from what I see in the ollama page, but even without the env var set it should work:\r\nhttps://github.com/ollama/ollama/blob/main/docs/faq.md)\r\n\r\n(venv) David@MacBook-Pro ollama-ebook-summary % launchctl setenv OLLAMA_HOST \"0.0.0.0\"\r\n(venv) David@MacBook-Pro ollama-ebook-summary % ollama list\r\nNAME                                  ID              SIZE      MODIFIED\r\nllama3.2-vision:11b-instruct-q8_0     7a7cc5461ef1    12 GB     32 hours ago\r\ncognitivetech/obook_title:q3_k_m      225e33869593    3.5 GB    34 hours ago\r\ncognitivetech/obook_summary:q5_k_m    19cc9e3d018e    5.1 GB    34 hours ago\r\n\r\n(venv) David@MacBook-Pro ollama-ebook-summary % python3 sum.py -c /Users/David/Documents/projects-tests/ollama-ebook-summary/out/epicshit.csv\r\n/Users/David/Documents/projects-tests/ollama-ebook-summary/venv/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020\r\n  warnings.warn(\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\n\r\nbut for other tools it's working. For example with 'Fabric' it works with ollama and there I just use the default configuration:\r\n\r\n./fabric --setup\r\n\r\nAvailable plugins (please configure all required plugins)::\r\n\r\nAI Vendors [at least one, required]\r\n\r\n\t[1]\tOpenAI\r\n\t[2]\tOllama (configured)\r\n\t[3]\tAzure\r\n\t[4]\tGroq\r\n\t[5]\tGemini\r\n\t[6]\tAnthropic\r\n\t[7]\tSiliconCloud\r\n\t[8]\tOpenRouter\r\n\t[9]\tMistral\r\n\r\nTools\r\n\r\n\t[10]\tDefault AI Vendor and Model [required] (configured)\r\n\t[11]\tPatterns - Downloads patterns [required] (configured)\r\n\t[12]\tYouTube - to grab video transcripts and comments (configured)\r\n\t[13]\tLanguage - Default AI Vendor Output Language (configured)\r\n\t[14]\tJina AI Service - to grab a webpage as clean, LLM-friendly text (configured)\r\n\r\n[Plugin Number] Enter the number of the plugin to setup (leave empty to skip):\r\n2\r\n\r\n[Ollama]\r\n\r\nEnter your Ollama URL (as a reminder, it is usually http://localhost:11434) (leave empty for 'http://localhost:11434' or type 'reset' to remove the value):\r\n\r\n"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "> (venv) David@MacBook-Pro ollama-ebook-summary % launchctl setenv OLLAMA_HOST \"0.0.0.0\"\r\n\r\nthis might be your problem.\r\n\r\nif you do that, then I think you need to use that `0.0.0.0` if from local machine, OR you need to use the local IP if from another machine on the same network (or public ip if exposed public)\r\n\r\notherwise if you `launchctl setenv OLLAMA_HOST \"127.0.0.1\"` it should be available from `localhost` as expected\r\n\r\n### [EDIT] \r\n\r\nActually that doesn't track since I have this setup at home and don't have the issue..  but its setup on linux, and I can't seem to find on my mac where the settings are stored.\r\n\r\nI looked at every file with ollama in the name primarily there are plist files but I don't find anything but you might find it there\r\n\r\n`/Users/David/Library/Preferences/com.electron.ollama.plist`\r\n\r\n"
+      },
+      {
+        "user": "datapta",
+        "body": "it's weird because doing a request via curl it works:\r\n\r\n ```\r\n curl -D - http://localhost:11434/api/generate -d \"{\\\"model\\\":\\\"cognitivetech/obook_summary:q5_k_m\\\",\\\"prompt\\\":\\\"hi\\\",\\\"stream\\\":false}\"\r\nHTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\nDate: Tue, 17 Dec 2024 17:22:20 GMT\r\nContent-Length: 551\r\n\r\n{\"model\":\"cognitivetech/obook_summary:q5_k_m\",\"created_at\":\"2024-12-17T17:22:20.898757Z\",\"response\":\"Hello! How can I assist you today?\\n\",\"done\":true,\"done_reason\":\"stop\",\"context\":[523,28766,321,28730,2521,28766,28767,6574,13,28789,28766,321,28730,2521,28766,28767,1838,13,5365,28705,2,28705,13,28789,28766,321,28730,2521,28766,28767,489,11143,13,16230,28808,1602,541,315,6031,368,3154,28804,13],\"total_duration\":2462077750,\"load_duration\":550452125,\"prompt_eval_count\":34,\"prompt_eval_duration\":1413000000,\"eval_count\":11,\"eval_duration\":497000000}%\r\n\r\ncurl -D - http://localhost:11434/api/generate -d \"{\\\"model\\\":\\\"llama2:latest\\\",\\\"prompt\\\":\\\"hi\\\",\\\"stream\\\":false}\"\r\nHTTP/1.1 200 OK\r\nContent-Type: application/json; charset=utf-8\r\nDate: Tue, 17 Dec 2024 17:13:25 GMT\r\nContent-Length: 502\r\n\r\n{\"model\":\"llama2:latest\",\"created_at\":\"2024-12-17T17:13:25.300291Z\",\"response\":\"Hello! It's nice to meet you. How are you today?\",\"done\":true,\"done_reason\":\"stop\",\"context\":[518,25580,29962,3532,14816,29903,29958,5299,829,14816,29903,6778,13,13,2918,518,29914,25580,29962,13,10994,29991,739,29915,29879,7575,304,5870,366,29889,1128,526,366,9826,29973],\"total_duration\":815637584,\"load_duration\":20609167,\"prompt_eval_count\":21,\"prompt_eval_duration\":383000000,\"eval_count\":16,\"eval_duration\":410000000}%\r\n(venv) David@MacBook-Pro ollama-ebook-summary %\r\n(venv) David@MacBook-Pro ollama-ebook-summary %\r\n(venv) David@MacBook-Pro ollama-ebook-summary %\r\n(venv) David@MacBook-Pro ollama-ebook-summary % python3 sum.py -c /Users/David/Documents/projects-tests/ollama-ebook-summary/out/epicshit.csv\r\nAPI request error: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\n```\r\n\r\nhere there's a discussion about this error. Could it be that the sum.py is using a post method instead of a get?\r\nhttps://github.com/ollama/ollama/issues/7689"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I am using a post method as described in the documentation. I'm at a loss with this.\r\n\r\nmy guess, it has something to do with your environment\r\n\r\nI see you have (venv).\r\n\r\nwhen you can access the model one place but not the other, then you are probably dealing with an environment issue"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I will close, because I do believe its related to your environment."
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "@cognitivetech I am running into this same problem. I assume this means its a venv issue, as you stated above. I've looked around on stack and google, but can't seem to find a good answer. Do you have any thoughts on where I could start to troubleshoot?"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "My best recommendation is to use a python manager such as pyenv or conda.\r\n\r\nI prefer conda for keeping environments separate across many projects with varying requirements. (pyenv is better when you are working with fewer projects or if you are good with venv but venv is not my specialty)\r\n\r\nonce you have a conda environment set, you shouldn't face this problem."
+      },
+      {
+        "user": "SolanaFox2",
+        "body": " I'll give it a go and let you know! Thanks"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "feel free to ask if you get stuck, but conda is pretty straightforward as long as you get the initialization into .bashrc or .profile or wherever your shell is initialized"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "@cognitivetech still having the same issue when using panda. I can hit localhost:11434 but not localhost:11434/api/generate.  I ran conda in a terminal from the anaconda navigator tool on windows.  Am I missing a step with conda?"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "try writing some [ollama api requests](https://github.com/ollama/ollama/blob/main/docs/api.md) directly from the same terminal and report back"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "This works:\r\n`curl -D - http://localhost:11434/api/generate -d \"{\\\"model\\\":\\\"llama3.2:latest\\\",\\\"prompt\\\":\\\"hi\\\",\\\"stream\\\":false}\"`\r\n\r\nThis does not:\r\n`curl -D - http://localhost:11434/api/generate -d \"{\"model\":\"llama3.2:latest\",\"prompt\":\"hi\",\"stream\":false}\"`\r\nReturns:\r\n`HTTP/1.1 400 Bad Request\r\nContent-Type: application/json; charset=utf-8\r\nDate: Fri, 03 Jan 2025 18:08:50 GMT\r\nContent-Length: 76\r\n{\"error\":\"invalid character 'm' looking for beginning of object key string\"}`\r\n\r\nAnd\r\n`curl http://localhost:11434/api/generate -d '{\"model\": \"llama3.2\", \"prompt\": \"Why is the sky blue?\"}'`\r\nReturns\r\n`{\"error\":\"invalid character '\\\\'' looking for beginning of value\"}curl: (3) URL rejected: Bad hostname\r\ncurl: (3) URL rejected: Port number was not a decimal number between 0 and 65535\r\ncurl: (3) unmatched close brace/bracket in URL position 21:\r\nWhy is the sky blue?}'`\r\n\r\nBTW I appreciate your quick responses and help!"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "### 2.\r\n**yours**: ` curl -D - http://localhost:11434/api/generate -d \"{\"model\":\"llama3.2:latest\",\"prompt\":\"hi\",\"stream\":false}\"`\r\n**escaped**: ` curl -D - http://localhost:11434/api/generate -d \"{\\\"model\\\":\\\"llama3.2:latest\\\",\\\"prompt\\\":\\\"hi\\\",\\\"stream\\\":false}\"`\r\n### 3.\r\n**yours**: ` curl http://localhost:11434/api/generate -d '{\"model\": \"llama3.2\", \"prompt\": \"Why is the sky blue?\"}'`\r\n**escaped**: ` curl http://localhost:11434/api/generate -d '{\\\"model\\\": \\\"llama3.2\\\", \\\"prompt\\\": \\\"Why is the sky blue?\\\"}'`\r\n\r\nyour first one that worked had escaped double quotes, the next 2 did not.\r\n\r\ntry it again w escaped quotes inside of the payload\r\n\r\n"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "Okay so 2 works now, but 3 I had to change `'{\\\"model\\\": \\\"llama3.2\\\", \\\"prompt\\\": \\\"Why is the sky blue?\\\"}'` to `\"{\\\"model\\\": \\\"llama3.2\\\", \\\"prompt\\\": \\\"Why is the sky blue?\\\"}\"` (changed single quote to double quote)"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "> At least 90% of the time, this “404 Not Found when using Ollama’s /api/generate” is due to the code requesting a model that Ollama does not have installed. \r\n\r\nhave you been sure to download one of the bulleted notes models? just in case, here are instructions :pray: \r\n\r\nhttps://github.com/cognitivetech/ollama-ebook-summary?tab=readme-ov-file#download-models\r\n\r\n#### 1. **Download a copy of Mistral Instruct v0.2 Bulleted Notes Fine-Tune**\r\n\r\n\r\n`ollama pull cognitivetech/obook_summary:q5_k_m`\r\n\r\n#### 2. **Set up a title model**\r\n\r\n##### a) _Download a preconfigured model_\r\n\r\n`ollama pull cognitivetech/obook_title:q3_k_m`\r\n\r\nFor your convenience Mistral 7b 0.3 is packaged with the necessary message history for title creation.\r\n\r\n_**or**_\r\n\r\n##### b) _Append this_ [message history](https://github.com/cognitivetech/ollama-ebook-summary/blob/main/Modelfile) _to the Modelfile of your choice_\r\n\r\n"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "Yeah I went through a full re-install, even redownloaded the models, this morning when I got back to work on it. \r\n\r\n`ollama list\r\nNAME                                                                 ID                  SIZE         MODIFIED\r\ncognitivetech/obook_title:q3_k_m              225e33869593    3.5 GB    5 hours ago\r\ncognitivetech/obook_summary:q5_k_m    19cc9e3d018e    5.1 GB    5 hours ago\r\nllama3.2:latest                                             a80c4f17acd5    2.0 GB    4 weeks ago\r\nnomic-embed-text:latest                            0a109f422b47    274 MB    5 months ago\r\nmistral:latest                                               f974a74358d6    4.1 GB    5 months ago\r\nopenhermes:latest                                      95477a2659b7    4.1 GB    5 months ago`"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "ok, I just pushed a few changes. \r\n\r\n1. Improved error handling: If the request is rejected, we'll get a more verbose output.\r\n2. I added \"general\" for general purpose model, needed for smaller sections, to the config. for now I just put llama3.1 there, but you can add whichever general purpose model you prefer to the updated config  (this was recently hard-coded and would certainly give error)\r\n3. How the config file was called was meant for linux file system... I updated that config handling to be more robust. \r\n\r\nI think # 3 was the real culprit, because all those values in the config, were likely inaccessible in powershell, but would work on wsl. (if I'm understanding correctly)\r\n\r\nI will come up with a more streamlined solution because there are now multiple places where a general purpose model is used, and this is somewhat inelegant, but.. this should hold us over for the night :pray: "
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "Awesome! I'll take a look and report back! "
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "getting an error `Response Body: {\"error\":\"model 'cognitivetech/obook_title:q4_k_m' not found\"}`\r\n\r\nthe model in the tutorial is \"obook_title:q3_k_m\""
+      },
+      {
+        "user": "cognitivetech",
+        "body": "you can just change that in your [config](https://github.com/cognitivetech/ollama-ebook-summary/blob/main/_config.yaml) to the one you have. \r\n\r\nthanks for lmk I will update and unify all things soon."
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "Everything is working great! Just wanted to say thanks for the help and awesome job!"
+      }
+    ]
+  },
+  {
+    "issue_number": 12,
+    "title": "OverflowError: Python int too large to convert to C long",
+    "author": "perfran",
+    "state": "closed",
+    "created_at": "2024-12-22T16:55:30Z",
+    "updated_at": "2025-01-03T21:50:59Z",
+    "labels": [],
+    "body": "```\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\blue\\ollama-ebook-summary-main\\book2text.py\", line 9, in <module>\r\n    from lib.chunking import process_csv  # Import process_csv from chunking.py\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\blue\\ollama-ebook-summary-main\\lib\\chunking.py\", line 16, in <module>\r\n    csv.field_size_limit(max_int)\r\nOverflowError: Python int too large to convert to C long\r\n```\r\n\r\nI tried to fix this error using chatgpt.\r\n\r\nHere is the chatgpt quote:\r\n\r\n> You're correct to expect that the try block should catch an OverflowError and handle it by reducing the value of max_int. However, there is a subtle issue in the provided code logic:\r\n> \r\n> Why the OverflowError Still Happens\r\n> The while True loop does not properly retry after an OverflowError. Here's why:\r\n> \r\n> If csv.field_size_limit(max_int) raises an OverflowError:\r\n> \r\n> The except block reduces max_int.\r\n> However, the while True loop does not reattempt csv.field_size_limit() with the reduced value. The break statement is in the try block and will always execute when no exception is raised, causing the loop to exit.\r\n> As a result:\r\n> \r\n> The code doesn't actually retry setting the limit after reducing max_int.\r\n> Correcting the Code\r\n> To ensure the retry mechanism works, the while True loop needs to retry setting csv.field_size_limit() with the reduced max_int in the except block.\r\n> ```\r\n> try:\r\n>     max_int = sys.maxsize\r\n>     while True:\r\n>         try:\r\n>             # Attempt to set the maximum field size limit\r\n>             csv.field_size_limit(max_int)\r\n>             break  # Break the loop if successful\r\n>         except OverflowError:\r\n>             # Reduce max_int and retry\r\n>             max_int = int(max_int / 10)\r\n> except Exception as e:\r\n>     print(f\"Unexpected error while setting field size limit: {e}\")\r\n> ```\r\n\r\nAnd after making this correction in chunking.py, it seems to work :)\r\n",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "oh, thanks perfran! I will review. This began here  https://github.com/cognitivetech/ollama-ebook-summary/issues/6, but I never got feedback on my initial attempt"
+      },
+      {
+        "user": "SolanaFox2",
+        "body": "I also had the same problem. The fix provided by chatgpt worked for me as well."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "oh, that's great, then I will integrate this posthaste"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I put the change as demonstrated:\r\n\r\n```\r\ntry:\r\n    max_int = sys.maxsize\r\n    while True:\r\n        try:\r\n            # Attempt to set the maximum field size limit\r\n            csv.field_size_limit(max_int)\r\n            break  # Break the loop if successful\r\n        except OverflowError:\r\n            # Reduce max_int and retry\r\n            max_int = int(max_int / 10)\r\nexcept Exception as e:\r\n    print(f\"Unexpected error while setting field size limit: {e}\")\r\n```\r\nwe'll see :pray: \r\n"
+      }
+    ]
+  },
+  {
+    "issue_number": 11,
+    "title": "Error while running sum.py",
+    "author": "pto2k",
+    "state": "closed",
+    "created_at": "2024-12-15T14:44:28Z",
+    "updated_at": "2024-12-22T11:12:12Z",
+    "labels": [],
+    "body": "I got this error for running sum.py on the summarize.txt in this repo. Attached output.\r\nDid I miss something in setup? I didn't get the 'Update Config File _config.yaml' part in the setup guide. Isn't that file alrady in this repo?\r\n```\r\nD:\\Repo\\ollama-ebook-summary>python sum.py --txt -v summarize.txt\r\nTraceback (most recent call last):\r\n  File \"D:\\Repo\\ollama-ebook-summary\\sum.py\", line 459, in <module>\r\n    main()\r\n  File \"D:\\Repo\\ollama-ebook-summary\\sum.py\", line 453, in main\r\n    process_text_input(input_file, config, api_base, model, prompt_alias,\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"D:\\Repo\\ollama-ebook-summary\\sum.py\", line 324, in process_text_input\r\n    write_csv_header(writer, model)\r\nTypeError: write_csv_header() takes 1 positional argument but 2 were given\r\n```",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "I'll try to look at that today. should be an easy fix"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "https://github.com/cognitivetech/ollama-ebook-summary/commit/4633025c2cc1b1444e5f6288306cfc5d6e0e4333\r\n\r\nfixed.. I was passing model name to the csv, no longer needed."
+      }
+    ]
+  },
+  {
+    "issue_number": 8,
+    "title": "Is it possible to come up with a simpler tutorial for those with no basics or weak basics?",
+    "author": "jameskitfu",
+    "state": "open",
+    "created_at": "2024-11-25T08:56:29Z",
+    "updated_at": "2024-11-30T12:38:54Z",
+    "labels": [
+      "documentation",
+      "good first issue"
+    ],
+    "body": "![image](https://github.com/user-attachments/assets/2f091217-3393-49b8-9902-7225dab14b87)\r\n当我进行到这个步骤的时候，我使用运行没有任何反应！如果可以的话非常期待您更新一个更加基础的教程或者在YouTube上更新一个视频教程！非常感谢您",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "ok, but if you tell me now which command you run, and what happens when it doesn't work, show me the output, I can help you.\r\n\r\nThis can be tied to https://github.com/cognitivetech/ollama-ebook-summary/issues/7 which can be improved by documentation, as well\r\n\r\nmore complete tutorial, I will try soon"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I added some additional details which will hopefully be of assistance until a complete tutorial is introduced\r\n\r\nhttps://github.com/cognitivetech/ollama-ebook-summary?tab=readme-ov-file#convert-e-book-to-chunked-csv-or-txt"
+      }
+    ]
+  },
+  {
+    "issue_number": 7,
+    "title": "Feature request: Add a verbose argument",
+    "author": "rafjaf",
+    "state": "closed",
+    "created_at": "2024-11-10T00:14:39Z",
+    "updated_at": "2024-11-27T18:20:59Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "Thank you very much for sharing your code.\r\n\r\nSince running sum.py can be quite long, it would be nice if it had a -v or --verbose argument to print the progress of the summarization process.",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "good point, rafjaf.\r\n\r\nwhat I do to check the progress is visually compare input csv to output csv. I have the whole project open in vs code so its easy to switch between files and see what's happening.\r\n\r\nI used to print each as its going to the terminal.. but that only tells you its still working , not really how much progress made.\r\n\r\nI will think about a good solution for this."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "yup, there you go! pull changes and you should find that -v prints output to the terminal"
+      }
+    ]
+  },
+  {
+    "issue_number": 6,
+    "title": "OverflowError: Python int too large to convert to C long",
+    "author": "reikairen",
+    "state": "closed",
+    "created_at": "2024-11-09T16:31:51Z",
+    "updated_at": "2024-11-25T23:57:44Z",
+    "labels": [],
+    "body": "C:\\Users\\reikairen\\Desktop\\ollama-ebook-summary-main>python book2text.py \"article.pdf\"\r\nTraceback (most recent call last):\r\n  File \"C:\\Users\\reikairen\\Desktop\\ollama-ebook-summary-main\\book2text.py\", line 12, in <module>\r\n    from lib.chunking import process_csv  # Import process_csv from chunking.py\r\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"C:\\Users\\reikairen\\Desktop\\ollama-ebook-summary-main\\lib\\chunking.py\", line 6, in <module>\r\n    csv.field_size_limit(sys.maxsize)\r\nOverflowError: Python int too large to convert to C long",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "thanks for reporting, reikairen. I'll look into this, should be an easy fix."
+      },
+      {
+        "user": "jiangweiatgithub",
+        "body": "I got exactly the same issue."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "https://github.com/cognitivetech/ollama-ebook-summary/commit/47c2d088d06074adeb7bfc9ceb9db7184a857323\r\n\r\nI have improved error handling for this case. please advise."
+      }
+    ]
+  },
+  {
+    "issue_number": 5,
+    "title": "Question on the Summary Tool",
+    "author": "TomLucidor",
+    "state": "closed",
+    "created_at": "2024-10-19T09:31:57Z",
+    "updated_at": "2024-10-25T16:24:21Z",
+    "labels": [],
+    "body": "1. How much support does this have for PDF, EPUB, MOBI, and MarkDown?\r\n2. Why only 2000 Token chunks when most LLMs can handle easily 4000+ Tokens? (yes \"forgotten middle\" is an issue for longer context)\r\n3. Are there advantages to break the book based on chapters or topics (and paragraphs) instead of arbitrary token count?\r\n4. What other models are out there that are best suited for either text embedding or summarization? Are finetunes any better, and if so what would the tuning methodology be?\r\n5. Are there benchmarks that makes quality determination of the newer LLMs easier? Everything from Llama finetunes to Mistral and Nemotron and Command R are getting recommended online\r\n6. Can this be mixed with SillyTavern or other conversational agents to have books to argue with one another?\r\n\r\nP.S. premature linkage to other repos that might be similar https://github.com/pszemraj/textsum/issues/14",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "1. currently cover some pdf, most epub, and markdown is markdown.. can choose what level to split by\r\n\r\n2. chunk size was chosen across 6 months of research and testing, at that size I get the best quality of results  (you can look in [notes/depreciated/](https://github.com/cognitivetech/ollama-ebook-summary/tree/main/notes/depreciated) for more details.)\r\n\r\nthat doesn't have to remain forever, but how the current fine-tune is trained. I'm open to experimenting with more, but not much.. \r\n\r\n**I already know when choosing higher chunk size:**\r\n- quality goes down\r\n- level of detail in response is reduced\r\n- hallucinations go up (even for SOTA)\r\n\r\n3. yes absolutely advantage to split by section for a more high quality production grade output.\r\n\r\nif you look at the outputs I create markdown file following the original ToC! If you don't care about navigation and how it was originally structured, then do whatever you want.\r\n\r\n4. There is none, that's why I made this. \r\n\r\n5. None of those new models have done better out of box than what mistral 7b v0.2 did (for the demands I apply to this particular task, i don't care what your benchmarks said they don't follow basic instructions is why I fine-tune)\r\n\r\nincidentally, I am using llm for creating titles now, but I will move back to something more \"traditional\" ml because its more quality and performant for that specific task.\r\n\r\n6. That's quite beyond the scope of this project and even logistically the idea of having books argue with each-other would require to fine-tune models specifically on that entirety of book.. \r\n\r\nin silly-tavern its possible to create entire world-books, and you could set that up based on outputs created from this tool, possibly... but again, way outside of the scope.\r\n\r\nP.S. That map-reduce stuff is interesting. I have my own plans to do something similar, so eventually I'll have a few levels of specificity...\r\n\r\nI've done my due diligence on this project and created this tool because there was no other tool or project which really addressed the subject... and when I began it was during the long-context craze where people insistent on making \"long-context\" models that, no matter how big or small of context provided, could not reliably follow instructions to produce a consistent output."
+      },
+      {
+        "user": "TomLucidor",
+        "body": "More on No.4, I think a casual browse of the internet would recommend models like (and I mean people recommend a lot of things): Tess, Llama2 or Llama3, Nous-Capybara, Pegasus,  Command R+, Mistral SciPhi, Mixtral, DBRX, Artic, Tinyllama, Starling, NoroCetacean, Miqu, led-base-book-summary, long-t5, distilbart, Inkblot, Yi, una-cybertron, phi-2 or phi-3, OpenOrca, GLM, Sensei, Gemma, Qwen2...\r\nYeah they are all of different sizes so each weight class might need their own evaluations, and maybe there are benchmarks that work?"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "that's an interesting idea to create benchmarks for summary. but that's a very opinionated task I'm afraid.\r\n\r\nI tried hundreds of models myself, including most of those you mentioned.\r\n\r\nits a lot of work.\r\n\r\nBetter just find one that works, or that you can make work, and move forward.\r\n\r\nThe existing fine-tune I have could be improved...\r\n\r\nthat's on my plan, I already know I can make a better dataset with llama3 405b, which in turn I can use to make a better 8-11b fine-tune.\r\n\r\nbut according to what I want **NONE of the models off-shelf will fit on my GPU and do a better job** than the fine-tune I have.\r\n\r\nI really wish there was a model I could just give instructions and have it follow them. But local models aren't quite there, yet. When trying to provided comprehensive notes on a \"small\" input (according to you) they do not follow the instructions.\r\n\r\nthat's based on my experience for the last year of FOMO downloading every model and thinking \"OMG it has great benchmarks it will do great\" and finding they did not.\r\n"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "to be clear, when I say \"Benchmarks would be a highly opinionated task\" what I mean is that whatever tests and benchmarks I looked at involved summary of very small text. They only ask for summary. This tool is not just a summary tool. \r\n\r\nI create comprehensive bulleted notes. I care about format. I'm summarizing entire books and want to be able to quickly navigate and review the information.\r\n\r\nSo I chose the models best able to follow the format, and presume that if they follow instructions better, they understand language better, and they will produce better summaries.\r\n\r\nUltimately, I would like to create benchmarks to test various models, that's how this project began, idk if you browsed the notes I shared earlier... \r\n\r\nbefore I released a package I did 7 different tests of what were purported to be the top models of that time, and they mostly did a miserable job at **consistently** creating the quality I asked for.\r\n\r\nSo I created a fine-tune of Mistral 7b v0.3 Instruct, using a dataset I created with the same (manually polished) after finding the best template to get 90% quality of results I was looking for.\r\n\r\nSince that time, I've tried all the best local models which will fit on my gpu. All the big ones anyways. \r\n\r\nLooking better in the 70b range than at the time I did my original testing. I can get at least one of those to work with just a prompt. and as I said llama3 405b does a good job at following instructions and is linguistically comparable to Opus.\r\n\r\nHowever, I'm not sure I would choose llama3 8b for fine-tuning. \r\n\r\nI will probably do my next fine tune, creating summaries with 405b, and use one of the new mistral models for the tune. Maybe llm38b is a good choice too, I've had some good conversations with it..  but I heard that it is more difficult to train.\r\n\r\nSemantic similarity would be relatively simple type of benchmark, and there is probably research and code demonstrating that. I really haven't looked at the research on this specific topic, but I will do that before proceeding to that stage.\r\n\r\nOtherwise, I am only more recently following the research, so I've only begun to see what people are doing with summaries."
+      },
+      {
+        "user": "TomLucidor",
+        "body": "@cognitivetech Thanks for the explanation, regarding bullet points and formatting I totally agree in this format (but also slightly biased towards having another format like having one-line summaries for sections), and also methods like Chain of Density for capturing \"key ideas\" that people might miss. Maybe there is an element of prompt engineering for models?\r\nBut at the same time I do have to note that there are a lot of different benchmark on testing summarization, and yes semantic similarity is one of them but I am not sure what other method or metric could make sense..."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "if you need another type of format, then I just send that prompt to a general purpose model. \"Provide a sentence summarizing this text\"\r\n\r\nas far as benchmarks, I will get there someday.\r\n\r\nthis is a really big project, there are many aspects which make it challenging. So I'm just driving forward... right now I have a great tool I've been using on the daily for maybe 9 months and is quite usable (for school and work)\r\n\r\nthere are more features I'm focused on including with pdf how to split sections between paragraphs.. as that just takes you to a page, not a specific location\r\n\r\nI do want to fine-tune a new model here in the coming months, as current version works fine, but we can do a lot better now.\r\n\r\nonce I've manually calibrated to optimum ideals, then more tests will be useful."
+      }
+    ]
+  },
+  {
+    "issue_number": 3,
+    "title": "Needs improved documentation",
+    "author": "elimbroc",
+    "state": "closed",
+    "created_at": "2024-09-07T23:56:52Z",
+    "updated_at": "2024-10-10T06:25:51Z",
+    "labels": [],
+    "body": "Sorry, I don't know what I'm doing wrong but it's probably just something obvious I'm missing.\r\n\r\nI'm on Mac, FWIW. I installed Python, pip, and all the dependencies I saw in book2text.py, but it kept creating 0 byte output documents without generating an error. The .epub does have a table of contents, I confirmed it in Calibre. What else could be going wrong? I then tried using another epub to csv converter and sum.py didn't do anything with the output, but it's probably not in the correct CSV format.",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "look in the `out` directory.. first it creates a csv with just chapters on each line (`filename.csv`) then _processed.csv should be chunks...\r\n\r\nso first check your `out/filename.csv` to see if text is extracted to begin with, then look at `out/filename_processed.csv`\r\n\r\nif you make the csv manually, just be sure to follow the expected format\r\n\r\n`Title, Text, Length` (length is ignored but it expects 3 columns)\r\n\r\nof course you should have ollama installed and the models loaded... (this one is hardcoded for title, so be sure to have that or update the local code with your title model `cognitivetech/obook_title:q3_k_m`)\r\n\r\ngive me more details and I can help."
+      },
+      {
+        "user": "elimbroc",
+        "body": "Okay, you're amazing and I appreciate your expertise and help! So, the problem was that python isn't default available on Mac, so I installed it with pyenv with [these instructions](https://gist.github.com/samuelbradshaw/932d48ef1eff07e288e25e4355dbce5d). Now book2text.py runs correctly. But I'm getting this error when I run sum.py:\r\n\r\n`Traceback (most recent call last):\r\n  File \"/Users/ericblom/Library/Mobile Documents/com~apple~CloudDocs/Downloads/eBooks/ollama-ebook-summary-main/sum.py\", line 159, in <module>\r\n    process_file(input_file, model)\r\n  File \"/Users/ericblom/Library/Mobile Documents/com~apple~CloudDocs/Downloads/eBooks/ollama-ebook-summary-main/sum.py\", line 103, in process_file\r\n    output = response.json()[\"response\"].strip()\r\n             ~~~~~~~~~~~~~~~^^^^^^^^^^^^\r\nKeyError: 'response'`"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I'm not sure... what is your python version? it should be 3.11.9... and what exactly is the command you are running for that step?\r\n\r\nand you are installing requirements `pip install -r requirements.txt`?\r\n\r\nweird though.. `KeyError: 'response'` seems like maybe something wrong with your ollama api \r\n\r\nand really don't be sorry, this is still a little hacky, I need to improve the workflow, cause I think right now its sub-optimal... but I just wanted to get this code live after hitting a bit of a speed bump with the web-app."
+      },
+      {
+        "user": "elimbroc",
+        "body": "Okay, I reverted Python3 to 3.11.9 and re-ran 'pip install -r requirements.txt' and it says there's no matching distribution foud for click compatible with Python 2. When I re-ran 'pip3 install -r requirements.txt' it fails to install the specified lxml version (I do have a more recent one installed). Then I ran 'python3 sum.py obook_summary willis_processed.csv' and it gives the same error. I installed ollama with the .pkg downloadable package on MacOS. Maybe it's the lxml issue? Or on your computer, is python an alias for python3?"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "ok, I updated the code with improved error handling, so next time you pull changes and then run the script we will have improved output.\r\n\r\nI never tried this on windows and have no idea if there is some slight difference there, or some reason your api uses a different port, who knows.\r\n\r\n---\r\n\r\nI also got these troubleshooting checks from Claude Sonnet 3.5. You can use these to verify your ollama installation.\r\n\r\n## Check Ollama's Default Port\r\n\r\nBy default, Ollama typically serves on port 11434. However, it's always good to verify this.\r\n\r\n## Verify Ollama is Running\r\n\r\n1. Open Task Manager (Ctrl + Shift + Esc)\r\n2. Go to the \"Processes\" tab\r\n3. Look for \"ollama.exe\" in the list of running processes\r\n\r\n## Check Port Usage\r\n\r\nTo see which ports Ollama is using:\r\n\r\n1. Open Command Prompt as Administrator\r\n2. Run the following command:\r\n\r\n   ```\r\n   netstat -ano | findstr :11434\r\n   ```\r\n\r\n   This will show you if anything is listening on the default Ollama port.\r\n\r\n## Check Ollama's Configuration\r\n\r\n1. Look for Ollama's configuration file. It's usually located in:\r\n   ```\r\n   C:\\Users\\YourUsername\\.ollama\\config\r\n   ```\r\n2. Open this file with a text editor to check for any custom port settings.\r\n\r\n## Use PowerShell for Detailed Information\r\n\r\nFor more detailed information, you can use PowerShell:\r\n\r\n1. Open PowerShell as Administrator\r\n2. Run:\r\n\r\n   ```powershell\r\n   Get-NetTCPConnection | Where-Object { $_.State -eq 'Listen' } | Select-Object LocalAddress, LocalPort, OwningProcess | Sort-Object LocalPort\r\n   ```\r\n\r\n3. Look for entries related to Ollama's process ID\r\n\r\n---\r\n\r\nits possible this is still a python issue, but you got the same error when you upgraded to the specific version of python 3.11 (you did check version on the terminal yes? `python3 --version`)...\r\n\r\nso if you update your code and try running again, we will have more verbose output to work on"
+      },
+      {
+        "user": "elimbroc",
+        "body": "Okay, here's what I'm getting, over and over:\r\n```\r\nError making request to API: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\nError generating title: 404 Client Error: Not Found for url: http://localhost:11434/api/generate\r\n```\r\nSo surely it's a problem with my installation. I used the downloadable ollama app, and when in a browser I navigate to http://localhost:11434 I get a page that says ollama is running. But when I try to navigate to http://localhost:11434/api or http://localhost:11434/api/generate it says error 404, page not found. Not sure what I'm missing.\r\n\r\nAny chance you're on Mac, too, by the way? Or at least Linux, hopefully? Claude Sonnet 3.5 gave Windows instructions and they didn't work but I'm not on Windows."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "oh, yes, I use mac and ubuntu!\r\n\r\nmaybe the issue is title generation...\r\n\r\nyou need to pull the model (and apologies, this is still not explicitly in the instructions, I was just going over this w someone else too)\r\n\r\n`ollama pull cognitivetech/obook_title:q3_k_m`\r\n\r\nor you can use the prompt from that model (found on this readme) with your favorite local llm, besides the obook_summary which is specialized for summary and not good at titles.. \r\n\r\nbe sure to look in sum.py for location of where `cognitivetech/obook_title:q3_k_m` is marked...\r\n\r\n...I suppose I should make a config file"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "ok, actually talking with a friend, they are having this problem because ollama stores the model name like `cognitivetech/obook_summary` but then it tries to append that name to the output filename, which the `/` messes up.. \r\n\r\n(which I didn't realize because I just pushed these models to ollama, though at home mine is named `mbn` and didn't fully think through the implications.)\r\n\r\nunfortunately I;m out of office, so I can try to push a fix for this, but you might be faster to just rename the model or adjust the output filename so it just uses the relevant part.\r\n\r\nthanks for helping me to test this, sorry for the trouble!"
+      },
+      {
+        "user": "elimbroc",
+        "body": "Ahhhh yes that could definitely be the problem. I was wondering.\n\nI can wait until you’re back in office, there’s no hurry for me. Thanks again for sharing this project with the world!\n\nRegards,\nEric Blom\n\n> On Sep 20, 2024, at 5:20 PM, CognitiveTech ***@***.***> wrote:\n>\n> ok, actually talking with a friend, they are having this problem because ollama stores the model name like cognitivetech/obook_summary but then it tries to append that name to the output filename, which the / messes up..\n>\n> (which I didn't realize because I just pushed these models to ollama, though at home mine is named mbn and didn't fully think through the implications.)\n>\n> unfortunately I;m out of office, so I can try to push a fix for this, but you might be faster to just rename the model or adjust the output filename so it just uses the relevant part.\n>\n> thanks for helping me to test this, sorry for the trouble!\n>\n> —\n> Reply to this email directly, [view it on GitHub](https://github.com/cognitivetech/ollama-ebook-summary/issues/3#issuecomment-2364742834), or [unsubscribe](https://github.com/notifications/unsubscribe-auth/AQAMIRNC45ZL7WCGBBV5WCLZXSUTHAVCNFSM6AAAAABN2N3V6GVHI2DSMVQWIX3LMV43OSLTON2WKQ3PNVWWK3TUHMZDGNRUG42DEOBTGQ).\n> You are receiving this because you authored the thread.Message ID: ***@***.***>"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "ok!!! that took longer than I anticipated, but ... I wanted to make it a lot less hacky and more like a real app.\r\n\r\nnow there is a config file and full instructions..\r\n\r\nyou won't have an issue with timeouts or that other nonsense, just pull the fresh code- and change the model name like in the instructions on the readme, then keep reading from there.. has 2 modes one for automated chunking csv and one for manual chunking text file.\r\n\r\nI will add a setup file soon so we don't have to deal with that manual model name changing but its working good for now."
+      },
+      {
+        "user": "cognitivetech",
+        "body": "I'm going to mark this as closed, feel free to comment if you have any further trouble."
+      }
+    ]
+  },
+  {
+    "issue_number": 2,
+    "title": "Question: Would this work with Markdown files?",
+    "author": "lightningRalf",
+    "state": "closed",
+    "created_at": "2024-07-14T19:39:30Z",
+    "updated_at": "2024-10-10T06:24:38Z",
+    "labels": [
+      "enhancement"
+    ],
+    "body": "So found a tool that creates a Markdown from a PDF file.\r\nhttps://github.com/VikParuchuri/marker/blob/dev/README.md\r\nI prefer this method, because it also extracts the images.\r\n\r\nBut now I have a lot of disertations in markdown files. And I would like to automate the summarizaiton just like you did.\r\n(haven't tried just adding the markdown file to privateGPT, to be honest)",
+    "comments": [
+      {
+        "user": "cognitivetech",
+        "body": "you could easily loop through and summarize certain headers of the markdown... its not implemented, but that will come.\r\n\r\nnow there is some real code you can play with here"
+      },
+      {
+        "user": "cognitivetech",
+        "body": "now you can use `chunkbyline.py --md=3 some.md` where 3 is the highest level of heading you want to split by.\r\n\r\nthen run the resulting csv through `python3 sum.py -c some_chunkd2.csv`\r\n\r\nand you are good to go!\r\n\r\nlet me know if you have any trouble. \r\n\r\neventually I'll update some of that stuff, but this is just coming together bit-by-bit"
+      }
+    ]
+  },
+  {
+    "issue_number": 1,
+    "title": "question",
+    "author": "jplaui",
+    "state": "closed",
+    "created_at": "2024-01-09T20:41:40Z",
+    "updated_at": "2024-01-09T20:47:55Z",
+    "labels": [],
+    "body": null,
+    "comments": []
+  }
+]
