@@ -3337,7 +3337,7 @@
     "labels": [
       "enhancement"
     ],
-    "body": "### Feature request\n\nIs it possible to download only the data that I am requesting and not the entire dataset? I run out of disk spaceas it seems to download the entire dataset, instead of only the part needed.\r\n\r\ncommon_voice[\"test\"] = load_dataset(\"mozilla-foundation/common_voice_11_0\", \"en\", split=\"test\", \r\n                                    cache_dir=\"cache/path...\",\r\n                                    use_auth_token=True,\r\n                                    download_config=DownloadConfig(delete_extracted='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')\r\n                                    )\r\n\n\n### Motivation\n\nefficiency improvement\n\n### Your contribution\n\nn/a",
+    "body": "### Feature request\n\nIs it possible to download only the data that I am requesting and not the entire dataset? I run out of disk spaceas it seems to download the entire dataset, instead of only the part needed.\r\n\r\ncommon_voice[\"test\"] = load_dataset(\"mozilla-foundation/common_voice_11_0\", \"en\", split=\"test\", \r\n                                    cache_dir=\"cache/path...\",\r\n                                    use_auth_token=True,\r\n                                    download_config=DownloadConfig(delete_extracted='[REDACTED_HF_TOKEN]')\r\n                                    )\r\n\n\n### Motivation\n\nefficiency improvement\n\n### Your contribution\n\nn/a",
     "comments": [
       {
         "user": "polinaeterna",
