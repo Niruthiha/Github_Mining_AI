@@ -1,0 +1,538 @@
+[
+  {
+    "repo": "huggingface/transformers",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 4,
+      "issues_with_labels": 4,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 1.25,
+      "total_repo_labels": 30,
+      "repo_stars": 145710,
+      "repo_language": "Python",
+      "repo_description": "\ud83e\udd17 Transformers: the model-definition framework for state-of-the-art machine learning models in text,"
+    }
+  },
+  {
+    "repo": "langchain-ai/langchain",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 7,
+      "issues_with_labels": 7,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 1.57,
+      "total_repo_labels": 30,
+      "repo_stars": 109600,
+      "repo_language": "Jupyter Notebook",
+      "repo_description": "\ud83e\udd9c\ud83d\udd17 Build context-aware reasoning applications"
+    }
+  },
+  {
+    "repo": "microsoft/semantic-kernel",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 18,
+      "issues_with_labels": 18,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 3.28,
+      "total_repo_labels": 30,
+      "repo_stars": 25062,
+      "repo_language": "C#",
+      "repo_description": "Integrate cutting-edge LLM technology quickly and easily into your apps"
+    }
+  },
+  {
+    "repo": "run-llama/llama_index",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 8,
+      "issues_with_labels": 8,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 1.88,
+      "total_repo_labels": 30,
+      "repo_stars": 42410,
+      "repo_language": "Python",
+      "repo_description": "LlamaIndex is the leading framework for building LLM-powered agents over your data."
+    }
+  },
+  {
+    "repo": "gradio-app/gradio",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 15,
+      "issues_with_labels": 15,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.2,
+      "total_repo_labels": 30,
+      "repo_stars": 38630,
+      "repo_language": "Python",
+      "repo_description": "Build and share delightful machine learning apps, all in Python. \ud83c\udf1f Star to support our work!"
+    }
+  },
+  {
+    "repo": "streamlit/streamlit",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 6,
+      "issues_with_labels": 6,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 3.33,
+      "total_repo_labels": 30,
+      "repo_stars": 39928,
+      "repo_language": "Python",
+      "repo_description": "Streamlit \u2014 A faster way to build and share data apps."
+    }
+  },
+  {
+    "repo": "openai/openai-python",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 15,
+      "issues_with_labels": 11,
+      "label_percentage": 73.3,
+      "avg_labels_per_issue": 0.93,
+      "total_repo_labels": 19,
+      "repo_stars": 27060,
+      "repo_language": "Python",
+      "repo_description": "The official Python library for the OpenAI API"
+    }
+  },
+  {
+    "repo": "anthropics/anthropic-sdk-python",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 12,
+      "issues_with_labels": 4,
+      "label_percentage": 33.3,
+      "avg_labels_per_issue": 0.33,
+      "total_repo_labels": 16,
+      "repo_stars": 2022,
+      "repo_language": "Python",
+      "repo_description": ""
+    }
+  },
+  {
+    "repo": "chroma-core/chroma",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 0
+  },
+  {
+    "repo": "weaviate/weaviate-python-client",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 1
+  },
+  {
+    "repo": "ollama/ollama",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 18,
+      "issues_with_labels": 15,
+      "label_percentage": 83.3,
+      "avg_labels_per_issue": 1.17,
+      "total_repo_labels": 30,
+      "repo_stars": 143897,
+      "repo_language": "Go",
+      "repo_description": "Get up and running with Llama 3.3, DeepSeek-R1, Phi-4, Gemma 3, Mistral Small 3.1 and other large la"
+    }
+  },
+  {
+    "repo": "pytorch/pytorch",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 2
+  },
+  {
+    "repo": "tensorflow/tensorflow",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 5,
+      "issues_with_labels": 5,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 3.8,
+      "total_repo_labels": 30,
+      "repo_stars": 190384,
+      "repo_language": "C++",
+      "repo_description": "An Open Source Machine Learning Framework for Everyone"
+    }
+  },
+  {
+    "repo": "scikit-learn/scikit-learn",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 8,
+      "issues_with_labels": 8,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.62,
+      "total_repo_labels": 30,
+      "repo_stars": 62366,
+      "repo_language": "Python",
+      "repo_description": "scikit-learn: machine learning in Python"
+    }
+  },
+  {
+    "repo": "ray-project/ray",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 9,
+      "issues_with_labels": 8,
+      "label_percentage": 88.9,
+      "avg_labels_per_issue": 3.22,
+      "total_repo_labels": 30,
+      "repo_stars": 37560,
+      "repo_language": "Python",
+      "repo_description": "Ray is an AI compute engine. Ray consists of a core distributed runtime and a set of AI Libraries fo"
+    }
+  },
+  {
+    "repo": "mlflow/mlflow",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 5,
+      "issues_with_labels": 4,
+      "label_percentage": 80.0,
+      "avg_labels_per_issue": 1.0,
+      "total_repo_labels": 30,
+      "repo_stars": 20904,
+      "repo_language": "Python",
+      "repo_description": "Open source platform for the machine learning lifecycle"
+    }
+  },
+  {
+    "repo": "wandb/wandb",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 4,
+      "issues_with_labels": 4,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.5,
+      "total_repo_labels": 30,
+      "repo_stars": 9983,
+      "repo_language": "Python",
+      "repo_description": "The AI developer platform. Use Weights & Biases to train and fine-tune models, and manage models fro"
+    }
+  },
+  {
+    "repo": "optuna/optuna",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 7,
+      "issues_with_labels": 7,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 1.71,
+      "total_repo_labels": 30,
+      "repo_stars": 12133,
+      "repo_language": "Python",
+      "repo_description": "A hyperparameter optimization framework"
+    }
+  },
+  {
+    "repo": "dask/dask",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 15,
+      "issues_with_labels": 15,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.0,
+      "total_repo_labels": 30,
+      "repo_stars": 13272,
+      "repo_language": "Python",
+      "repo_description": "Parallel computing with task scheduling"
+    }
+  },
+  {
+    "repo": "prefecthq/prefect",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 11,
+      "issues_with_labels": 9,
+      "label_percentage": 81.8,
+      "avg_labels_per_issue": 1.09,
+      "total_repo_labels": 30,
+      "repo_stars": 19542,
+      "repo_language": "Python",
+      "repo_description": "Prefect is a workflow orchestration framework for building resilient data pipelines in Python."
+    }
+  },
+  {
+    "repo": "bentoml/BentoML",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 9,
+      "issues_with_labels": 8,
+      "label_percentage": 88.9,
+      "avg_labels_per_issue": 0.89,
+      "total_repo_labels": 21,
+      "repo_stars": 7787,
+      "repo_language": "Python",
+      "repo_description": "The easiest way to serve AI apps and models - Build Model Inference APIs, Job queues, LLM apps, Mult"
+    }
+  },
+  {
+    "repo": "ultralytics/yolov5",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 16,
+      "issues_with_labels": 14,
+      "label_percentage": 87.5,
+      "avg_labels_per_issue": 1.69,
+      "total_repo_labels": 29,
+      "repo_stars": 54252,
+      "repo_language": "Python",
+      "repo_description": "YOLOv5 \ud83d\ude80 in PyTorch > ONNX > CoreML > TFLite"
+    }
+  },
+  {
+    "repo": "ultralytics/ultralytics",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 10,
+      "issues_with_labels": 10,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.1,
+      "total_repo_labels": 30,
+      "repo_stars": 42034,
+      "repo_language": "Python",
+      "repo_description": "Ultralytics YOLO11 \ud83d\ude80"
+    }
+  },
+  {
+    "repo": "opencv/opencv-python",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 11,
+      "issues_with_labels": 4,
+      "label_percentage": 36.4,
+      "avg_labels_per_issue": 0.45,
+      "total_repo_labels": 8,
+      "repo_stars": 4864,
+      "repo_language": "Python",
+      "repo_description": "Automated CI toolchain to produce precompiled opencv-python, opencv-python-headless, opencv-contrib-"
+    }
+  },
+  {
+    "repo": "roboflow/supervision",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 8,
+      "issues_with_labels": 8,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 1.0,
+      "total_repo_labels": 30,
+      "repo_stars": 26762,
+      "repo_language": "Python",
+      "repo_description": "We write your reusable computer vision tools. \ud83d\udc9c"
+    }
+  },
+  {
+    "repo": "facebookresearch/detectron2",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 16,
+      "issues_with_labels": 11,
+      "label_percentage": 68.8,
+      "avg_labels_per_issue": 1.0,
+      "total_repo_labels": 16,
+      "repo_stars": 32180,
+      "repo_language": "Python",
+      "repo_description": "Detectron2 is a platform for object detection, segmentation and other visual recognition tasks."
+    }
+  },
+  {
+    "repo": "explosion/spaCy",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 11,
+      "issues_with_labels": 4,
+      "label_percentage": 36.4,
+      "avg_labels_per_issue": 0.45,
+      "total_repo_labels": 30,
+      "repo_stars": 31784,
+      "repo_language": "Python",
+      "repo_description": "\ud83d\udcab Industrial-strength Natural Language Processing (NLP) in Python"
+    }
+  },
+  {
+    "repo": "nltk/nltk",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 14,
+      "issues_with_labels": 2,
+      "label_percentage": 14.3,
+      "avg_labels_per_issue": 0.29,
+      "total_repo_labels": 30,
+      "repo_stars": 14122,
+      "repo_language": "Python",
+      "repo_description": "NLTK Source"
+    }
+  },
+  {
+    "repo": "RasaHQ/rasa",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 1
+  },
+  {
+    "repo": "huggingface/datasets",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 11,
+      "issues_with_labels": 6,
+      "label_percentage": 54.5,
+      "avg_labels_per_issue": 0.55,
+      "total_repo_labels": 30,
+      "repo_stars": 20279,
+      "repo_language": "Python",
+      "repo_description": "\ud83e\udd17 The largest hub of ready-to-use datasets for ML models with fast, easy-to-use and efficient data m"
+    }
+  },
+  {
+    "repo": "sentence-transformers/sentence-transformers",
+    "suitable": false,
+    "reason": "API_ERROR"
+  },
+  {
+    "repo": "tiangolo/fastapi",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 2
+  },
+  {
+    "repo": "pallets/flask",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 6,
+      "issues_with_labels": 0,
+      "label_percentage": 0.0,
+      "avg_labels_per_issue": 0.0,
+      "total_repo_labels": 23,
+      "repo_stars": 69768,
+      "repo_language": "Python",
+      "repo_description": "The Python micro framework for building web applications."
+    }
+  },
+  {
+    "repo": "encode/httpx",
+    "suitable": false,
+    "reason": "POOR_LABELING",
+    "stats": {
+      "total_issues_checked": 8,
+      "issues_with_labels": 2,
+      "label_percentage": 25.0,
+      "avg_labels_per_issue": 0.25,
+      "total_repo_labels": 30,
+      "repo_stars": 14196,
+      "repo_language": "Python",
+      "repo_description": "A next generation HTTP client for Python. \ud83e\udd8b"
+    }
+  },
+  {
+    "repo": "aio-libs/aiohttp",
+    "suitable": false,
+    "reason": "TOO_FEW_ACTUAL_ISSUES",
+    "issue_count": 1
+  },
+  {
+    "repo": "jupyter/notebook",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 13,
+      "issues_with_labels": 9,
+      "label_percentage": 69.2,
+      "avg_labels_per_issue": 1.62,
+      "total_repo_labels": 30,
+      "repo_stars": 12356,
+      "repo_language": "Jupyter Notebook",
+      "repo_description": "Jupyter Interactive Notebook"
+    }
+  },
+  {
+    "repo": "jupyterlab/jupyterlab",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 8,
+      "issues_with_labels": 8,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.25,
+      "total_repo_labels": 30,
+      "repo_stars": 14643,
+      "repo_language": "TypeScript",
+      "repo_description": "JupyterLab computational environment."
+    }
+  },
+  {
+    "repo": "pandas-dev/pandas",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 5,
+      "issues_with_labels": 5,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.6,
+      "total_repo_labels": 30,
+      "repo_stars": 45721,
+      "repo_language": "Python",
+      "repo_description": "Flexible and powerful data analysis / manipulation library for Python, providing labeled data struct"
+    }
+  },
+  {
+    "repo": "matplotlib/matplotlib",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 5,
+      "issues_with_labels": 5,
+      "label_percentage": 100.0,
+      "avg_labels_per_issue": 2.0,
+      "total_repo_labels": 30,
+      "repo_stars": 21346,
+      "repo_language": "Python",
+      "repo_description": "matplotlib: plotting with Python"
+    }
+  },
+  {
+    "repo": "plotly/plotly.py",
+    "suitable": true,
+    "reason": "GOOD_LABELS",
+    "stats": {
+      "total_issues_checked": 13,
+      "issues_with_labels": 10,
+      "label_percentage": 76.9,
+      "avg_labels_per_issue": 1.62,
+      "total_repo_labels": 22,
+      "repo_stars": 17297,
+      "repo_language": "Python",
+      "repo_description": "The interactive graphing library for Python :sparkles:"
+    }
+  }
+]
